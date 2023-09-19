@@ -1,0 +1,197 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+
+\usepackage{tabularx}
+\usepackage{amsmath}
+\usepackage{pgfplots}
+\usepackage{geometry}
+\usepackage{multicol}
+\geometry{
+    left=1cm,right=1cm,top=2cm,bottom=2cm
+}
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+
+\newtheorem{definition}{Определение}
+\newtheorem{theorem}{Теорема}
+
+\DeclareMathOperator{\sign}{sign}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks, citecolor=black, filecolor=black, linkcolor=black, urlcolor=black
+}
+
+\title{Интегралы и дифференциальные уравнения}
+\author{Лисид Лаконский}
+\date{September 2023}
+
+\begin{document}
+\raggedright
+
+\maketitle
+
+\tableofcontents
+\pagebreak
+
+\section{Лекция — 19.09.2023}
+
+\subsection{Двойные интегралы}
+
+\subsubsection{Геометрическое приложение двойных интегралов}
+
+$V = \int\int\limits_{D} f(x, y) \diff x \diff y$
+
+$z = 4 - x^2 - y^2$
+
+$z = 0$
+
+$x = 0 \ \ x = 1$
+
+$y = 0 \ \ y = 1.5$
+
+Если $z = 0$, то $x^2+y^2 = 4$. Если $z = 1$, то $x^2+y^2 = 3$. Если $z = 4$, то имеем точку. Если $z > 4$, то не имеем ничего. Если $z < 4$, то имеем окружности все большего радиуса.
+
+Таким образом, $z = 4 - x^2 - y^2$ — гиперболоид.
+
+$4y-x^2y - \frac{y^3}{3} \bigg|_{y=0}^{1.5} = 4 * 1.5 - x^2 * 1.5 - \frac{27}{8*3}$
+
+$V = \int\int\limits_{x=0,y=0,x=1,y=1.5} (4-x^2-y^2) dx dy = \int\limits_{0}^{1} \int\limits_{0}^{1.5} (4-x^2-y^2) \diff y = \int\limits_{0}^{1} (6-1.5x^2 - \frac{9}{8}) \diff x = 6x - \frac{1.5 x^3}{3} - \frac{9}{8} x \bigg|_{0}^{1} = 6 - \frac{1}{2} - \frac{9}{8} = \dots$
+
+\subsection{Тройные интегралы}
+
+Имеем в пространстве объем $V$, ограниченный плоскостью $S$.
+
+$f(x, y, z)$ — объемная плотность.
+
+$\lim\limits_{diam \Delta u_i \to 0} \sum\limits_{i = 0}^{\infty} f(P_i) \Delta v_i = \int\int\limits_{V}\int f(x, y, z) \diff v = \int\int\limits_{V} \int f(x, y, z) \diff x \diff y \diff z$ — тройной интеграл, мы можем его разбивать на суммы интегралов.
+
+Если нам нужно перейти к повторным интегралам, то мы делаем так же, как мы делали в случае двойных интегралов: $\int\limits_{a}^{b} \diff x \int\limits_{f(x)}^{\psi(x)} \diff y \int\limits_{z=\phi_1(x, y)}^{z=\phi_2(x,y)} f(x, y, z) \diff z$
+
+Кроме того: $V = \int\int\limits_{V}int \diff x \diff y \diff z = \int \diff x \int (\phi_2(x, y) - \phi_1(x, y)) \diff y$ — дальше все то же самое, как с обычным двойным интегралом.
+
+Можно так же, как в плоском случае (двойным интегралом) делать замены переменных, однако все будет гораздо более сложным и замысловатым.
+
+\subsubsection{Переход к цилиндрическим координатам}
+
+Имеем точку $M(\rho, \phi, z)$, тогда имеем следующее:
+$\begin{cases}
+    x = \rho \cos \phi \\
+    y = \rho \sin \phi \\
+    z = z
+\end{cases}$
+
+Пусть $x = x(u, t, w)$, $y = y(u, t, w)$, $z = z(u, t, w)$. Тогда $Y = \begin{vmatrix}
+    \frac{\diff x}{\diff u} & \frac{\diff x}{\diff t} & \frac{\diff x}{\diff w} \\
+    \frac{\diff y}{\diff u} & \frac{\diff y}{\diff t} & \frac{\diff y}{\diff w} \\
+    \frac{\diff z}{\diff u} & \frac{\diff z}{\diff t} & \frac{\diff z}{\diff w}
+\end{vmatrix}$. Если $\rho = u$, $\phi = t$, $z = w$, то $Y = \begin{vmatrix}
+    \cos \phi & -\rho \sin \phi & 0 \\
+    \sin \phi & \rho \cos \phi & 0 \\
+    0 & 0 & 1
+\end{vmatrix} = \rho$ — якобиан перехода (видим, что он точно такой же, как в случае полярных координат).
+
+\paragraph{Пример №1} Вычислить площадь, если $z = 0$, $x^2+y^2=1$ — вертикальный цилиндр, $x+y+2-3=0$ — плоскость.
+
+$V = \int\int\limits_{V}\int \diff x \diff y \diff z = \dots$ 
+
+Попробуем перейти в цилиндрические координаты и сразу расставить в них пределы.
+
+Вычислим: $z = 3 - x - y = 3 - \rho \cos \phi - \rho \sin \phi$
+
+$\dots = \int\limits_{0}^{2 \pi} \diff \phi \int\limits_{0}^{1} \rho \diff \rho \int\limits_{0}^{3-\rho \cos \phi - \rho \sin \phi} \diff z = \dots$
+
+$\int\limits_{0}^{1} (3 \rho - \rho^2 (\cos \phi + \sin \phi)) \diff \rho = \frac{3}{2} \rho^2 = (\frac{\rho^{3}}{3} (\cos \phi + \sin \phi)) \bigg|_{\rho = 0}^{\rho = 1} = \frac{3}{2} - \frac{1}{3} (\cos \phi + \sin \phi)$
+
+$\dots = \int\limits_{0}^{2 \pi} (\frac{3}{2} - \frac{1}{3} (\cos \phi + \sin \phi)) \diff \phi = (\frac{3}{2} \phi - \frac{1}{3} (\sin \phi - \cos \phi)) \bigg|_{0}^{2 \pi} = \frac{3 * 2 \pi}{2} = 3 \pi$
+
+\textbf{Ответ}: $3 \pi$
+
+\subsubsection{Переход к сферическим координатам}
+
+Имеем точку $M(\rho; \phi; \theta)$, $\rho$ — длина радиус-вектора из нуля к точке, $\phi$ — угол, отсчитываемый от положительного направления вертикальной оси (но может отсчитываться и от других осей — необходимо быть внимательным), $\theta$ — угол, отсчитываемый от положительного направления оси $Ox$. В этом конкретном случае: $
+\begin{cases}
+    x = \rho \sin \phi \cos \theta \\
+    y = \rho \sin \phi \sin \theta \\
+    z = \rho \cos \phi
+\end{cases}$
+
+
+Допустим, имелось следующее уравнение: $x^2 + y^2 + z^2 = 9$. Преобразуем его: $\rho^2 \sin^2 \phi \cos^2 \theta + \rho^2 \sin^2 \phi \sin^2 \theta + \rho^2 \cos^2 \phi = \rho^2 \sin^2 \phi * 1 + \rho^2 \cos^2 \phi$
+
+Получаем: $\rho = 3$ — уравнение сферы в сферических координатах.
+
+Якобиан перех. от декартовых к сферическим координатам: $Y = \begin{vmatrix}
+    \frac{\diff x}{\diff \rho} & \frac{\diff x}{\diff \phi} & \frac{\diff x}{\diff \theta} \\
+    \frac{\diff y}{\diff \rho} & \frac{\diff y}{\diff \theta} & \frac{\diff y}{\diff \theta} \\
+    \frac{\diff z}{\diff \rho} & \frac{\diff z}{\diff \phi} & \frac{\diff z}{\diff \theta}
+\end{vmatrix} = \begin{vmatrix}
+        \sin \phi \cos \theta & \rho \cos \phi \cos \theta & -\rho \sin \phi \sin \theta \\
+        \sin \phi \sin \theta & \rho \cos \phi \sin \theta & \rho \sin \phi \cos \theta \\
+        \cos \phi & - \rho \sin \phi & 0
+\end{vmatrix} = \rho^2 \sin \phi$ — эту фигню бы должны подставлять в интеграл, если выполняем переход.
+
+\paragraph{Пример №1} Перейдя к сферическим координатам, вычислить следующий интеграл, если имеется верхняя часть шара $x^2 + y^2 + z^2 = 9$:
+
+$\int\int\limits_{V} \int (x^2 + y^2) \diff x \diff y \diff z = \int\limits_{0}^{\pi/2} \diff \phi \int\limits_{0}^{2 \pi} \diff \theta \int\limits_{0}^{3} (\rho^2 \sin^2 \phi \cos^2 \theta + \rho^2 \sin^2 \phi \sin^2 \theta) (\rho^2 \sin \phi) \diff \rho = \int\limits_{0}^{2 \pi} \diff \theta \int\limits_{0}^{\pi/2} \sin^3 \phi \diff \phi \int\limits_{0}^{3} \rho^4 \diff \rho = \frac{3^5}{5}\bigg|_{0}^{2 \pi} \diff \theta = \dots$
+
+$\int \sin^3 \phi \diff \phi = \int (1 - \cos^2 \phi)(-\diff \cos \phi) = \int\limits_{0}^{\pi/2} (\cos^2 \phi - 1) \diff \cos \phi = (\frac{\cos^3 \phi}{3} - \cos \phi) \bigg|_{0}^{\pi/2} = 0 - \frac{1}{3} + 1 = \frac{2}{3}$
+
+$\dots = \frac{2 * 3^{4}}{5} * \theta \bigg|_{0}^{2 \pi} = \frac{4 \pi * 3^4}{5}$
+
+\subsubsection{Физические приложения тройных интегралов}
+
+\paragraph{Момент инерции} $I_{z} = \int\int\limits_{D}\int (x^2 + y^2) \gamma (x, y, z) \diff x \diff y \diff z$, $I_{x} = \int\int\limits_{D}\int (y^2 + z^2) \gamma (x, y, z) \diff x \diff y \diff z$, $I_{y} = \int\int\limits_{D}\int (x^2 + z^2) \gamma (x, y, z) \diff x \diff y \diff z$, где $\gamma$ — плотность.
+
+\paragraph{Статические моменты относительно плоскостей} $M_{x y} = \int\int\limits_{V} \int z \gamma (x, y, z) \diff x \diff y \diff z$, $M_{x z} = \int\int\limits_{V} \int y \gamma (x, y, z) \diff x \diff y \diff z$, $M_{y z} = \int\int\limits_{V} \int x \gamma (x, y, z) \diff x \diff y \diff z$, где $\gamma$ — плотность.
+
+\paragraph{Координаты центра масс} Нагуглите в интернете.
+
+\subsection{Криволинейные интегралы (II род)}
+
+Имеем некоторую кривую от точки $M$ до точки $N$. Вдоль этой кривой двигается некоторая точка $R(x, y)$ под действием некоторой силы $\overrightarrow{F} = \overrightarrow{F}(R) = P(x, y) \overrightarrow{i} + Q(x, y) \overrightarrow{j}$. Вычислить работу силы $\overrightarrow{F}$ при перемещении точки из $M$ в $N$.
+
+Разобьем кривую на мелкие кусочки: $\Delta \overrightarrow{S_{i}} = \overrightarrow{M_{i} M_{i + 1}} = \Delta x_i \overrightarrow{i} + \Delta y_i \overrightarrow{j}$. На этом кусочке $A_{i} \approx F_{i} \Delta S_{i} = P_{i} \Delta x_{i} + Q_{i} \Delta y_{i}$.
+
+$\lim\limits_{n \to \infty} \sum\limits_{i = 1}^{n} (P_{i} \Delta x_{i} + Q_{i} \Delta y_{i}) = \int\limits_{M}^{N} P(x, y) \diff x + Q(x, y) \diff y$ — криволинейный интеграл (II род).
+
+\subsubsection{Свойства криволинейных интегралов}
+
+\begin{enumerate}
+    \item Криволинейный интеграл определяется подинтегральным выражением, формой кривой интегрирования и направлением интегрирования.
+    \item Если точка $L$ находится между точками $M$ и $N$, то $\int\limits_{M}^{N} = \int\limits_{M}^{L} + \int\limits_{L}^{N}$ — подобное разбиение возможно для любого конечного количества точек.
+\end{enumerate}
+
+\subsubsection{Параметрическое задание кривой}
+
+$x = \phi(t)$, $\diff x = \phi'(t) \diff t$
+
+$y = \psi(t), \diff y = \psi'(t) \diff t$
+
+$\int\limits_{M}^{N} P(x, y) \diff x + Q(x, y) \diff y = \int\limits_{t_1}^{t_2} [P(\phi(t), \psi(t)) \phi'(t) \diff t + Q(\phi(t), \psi(t)) \psi'(t)] \diff t$
+
+\subsubsection{Примеры решения задач}
+
+\paragraph{Пример №1} $\int\limits_{A}^{B} x^2 y \diff x + x y \diff y$,
+
+$\begin{cases}
+    x = 2 \cos t, x' = -2 \sin t \\ 
+    y = 2 \sin t, y' = 2 \cos t \\ 
+    t \in [0; \frac{\pi}{2}]
+\end{cases}
+$
+
+$\int\limits_{A}^{B} x^2 y \diff x + x y \diff y = \int\limits_{0}^{\pi/2} [(2 \cos t)^2 \sin t + (2 \cos t)^2 2 \sin t (-2 \sin t)] \diff t = \dots$
+
+$\int\limits_{0}^{\pi/2} 8 \cos^2 t (-\diff \cos t) = \frac{-8 \cos^3 t}{3} \bigg|_{0}^{\pi/2} = \frac{8}{3}$
+
+$- 4 \int\limits_{0}^{\pi/2} 4 \cos^2 t \sin^2 t \diff t = -4 \int\limits_{0}^{\pi/2} \sin^2 2 \diff t = 2 \int\limits_{0}^{\pi/2} (\cos 4t - 1) \diff t = 2 (\frac{1}{4} \sin 4 t - 1) \bigg|_{0}^{\pi/2} = -\pi$
+
+$\dots = \frac{8}{3} - \pi$
+
+
+
+\end{document}
