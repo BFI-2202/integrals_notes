@@ -1,0 +1,144 @@
+\documentclass{article}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+
+\usepackage{tabularx}
+\usepackage{amsmath}
+\usepackage{pgfplots}
+\usepackage{geometry}
+\usepackage{multicol}
+\geometry{
+    left=1cm,right=1cm,top=2cm,bottom=2cm
+}
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+
+\newtheorem{definition}{Определение}
+\newtheorem{theorem}{Теорема}
+
+\DeclareMathOperator{\sign}{sign}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks, citecolor=black, filecolor=black, linkcolor=black, urlcolor=black
+}
+
+\title{Интегралы и дифференциальные уравнения}
+\author{Лисид Лаконский}
+\date{October 2023}
+
+\begin{document}
+\raggedright
+
+\maketitle
+
+\tableofcontents
+\pagebreak
+
+\section{Практическое занятие — 03.10.2023}
+
+\subsection{Криволинейные интегралы (II род)}
+
+На прошлой паре мы записывали:
+
+$\int\limits_{M}^{N} P(x y) \diff x + Q(x, y) \diff y$ (по пути $L$) $= \int\limits_{t_1}^{t_2} P(x(t), y(t)) x'_t + Q(x(t), y(t) y'_t) \diff t$, $\begin{cases}
+    x = x(t) \ \diff x = x' \diff t \\
+    y = y(t) \ \diff y = y' \diff t \\
+    t_1 \le t \le t_2
+\end{cases}$
+
+Но можно иначе:
+
+$\begin{cases}
+    x = x \ \diff x = \diff x \\
+    y = y(x) \ \diff y = y' \diff x \\
+    x_1 \le x \le x_2
+\end{cases}, \int\limits_{M(x_1, y_1)}^{N(x_2, y_2)} P(x, y) \diff x + Q(x, y) \diff y = \int\limits_{x_1}^{x_2} (P(x, y(x)) + Q(x, y(x)) y'_x) \diff x$ по $L: y = y(x)$
+
+\subsubsection{Условие независимости криволинейных интегралов от пути интегрирования}
+
+\textbf{Если под знаком интеграла находится полный дифференциал какой-то функции, то ответ не будет зависеть от пути интегрирования, а только от начальной и конечной точки}.
+
+$\int\limits_{(x_1, y_1)}^{(x_2, y_2)} \diff u = u \bigg|_{(x_1, y_1)}^{(x_2, y_2)} = u(x_2, y_2) - u(x_1. y_1)$
+
+\textbf{Во всех других случаях криволинейный интеграл зависит от пути интегрирования.}
+
+\textbf{Полный дифференциал} функции двух переменных:
+
+$\diff u = \frac{\delta u}{\delta x} \diff x + \frac{\delta u}{\delta y} \diff y$
+
+При этом:
+
+$\frac{\delta}{\delta y} (\frac{\delta u}{\delta x}) = \frac{\delta}{\delta x} (\frac{\delta u}{\delta y})$
+
+\begin{theorem}
+    Если во всех точках области $G$ $P(x, y)$, $Q(x, y)$ частные производные $\frac{\delta P}{\delta y}$, $\frac{\delta Q}{\delta x}$ являются непрерывны, то необходимым и достаточным условием того, что криволинейный интеграл не зависит от пути интегрирования является выполнение условия $\frac{\delta P}{\delta y} = \frac{\delta Q}{\delta x}$ во всех точках области $G$.
+\end{theorem}
+
+\begin{theorem}
+    При выполнении $\frac{\delta P}{\delta y} = \frac{\delta Q}{\delta x}$ криволиненый интеграл по замкнутому контуру равен нулю: $\oint (P \diff x + Q \diff y) = 0$
+\end{theorem}
+
+\subsubsection{Формула Грина–Остроградского}
+
+$\oint\limits_{C} P(x, y) \diff x + Q(x, y) \diff y = \int\int\limits_{D} (\frac{\delta Q}{\delta x} - \frac{\delta P}{\delta y}) \diff x \diff y = \int\limits_{a}^{b} \diff x \int\limits_{y_1(x)}^{y_2(x)} \frac{\delta P}{\delta y} \diff y = \int\limits_{a}^{b} (P(x, y_2(x)) - P(x, y_1(x))) \diff x$, где $D$ — замкнутая область, ограниченная контуром $C$.
+
+\textbf{Примечание:} функции $P(x, y)$, $Q(x, y)$ должны быть определены и непрерывны в области $D$ и, кроме того, иметь в ней непрерывные частные производные $\frac{\delta P}{\delta y}$, $\frac{\delta Q}{\delta x}$.
+
+\paragraph{Следствие из данной формулы} Если $P = 0$, $Q = x$, то $\oint x \diff y = \int\int \diff x \diff y$ — площадь, ограниченная областью.
+
+\subsubsection{Примеры}
+
+\paragraph{Пример №1}
+
+$\int\limits_{(1, 1)}^{(2, 2)} \frac{y \diff x + x \diff y}{x^2 + y^2}$ (по прямой $y = x$) $= \int \frac{y \diff x}{x^2 + y^2} + \frac{x \diff y}{x^2 + y^2} = \int\limits_{1}^{2} (\frac{x}{x^2 + x^2} + \frac{x}{x^2 + x^2}) \diff x = \int\limits_{1}^{2} \frac{2x \diff x}{2x^2} = \ln |x| \bigg|_{1}^{2} = \ln 2$
+
+\paragraph{Пример №2}
+
+$\int\limits_{(0, 0)}^{(1, 1)} 2x^2 y \diff x + x \sqrt{y} \diff y$. Вычислить данный интеграл по:
+
+\begin{enumerate}
+    \item прямой $y = x$;
+    
+    $\int\limits_{0}^{1} (2x^2 x + x \sqrt{x}) \diff x = \int\limits_{0}^{1} (2x^3 + x^{3/2}) \diff x = \frac{2x^4}{4/2} + \frac{2x^{5/2}}{5} \bigg|_{0}^{1} = \frac{9}{10}$
+    \item параболе $y = x^2$;
+    
+    $\int\limits_{0}^{1} (2x^2 x^2 + x \sqrt{x^2} 2x) \diff x = \int\limits_{0}^{1} (2x^4 + 2x^3) \diff x = (\frac{2x^{5}}{5} + \frac{2x^{4}}{4}) \bigg|_{0}^{1} = \frac{9}{10}$
+    \item ломанной линии, образованной $y = x$, $y = x^2$
+    
+    $\int\limits_{0}^{B} + \int\limits_{B}^{A} = \int\limits_{0}^{1} \sqrt{y} \diff y = \frac{2y^{3/2}}{3} \bigg|_{0}^{1} = \frac{2}{3}$
+\end{enumerate}
+
+\paragraph{Пример №3}
+
+Пусть $P = (2x \cos y - y^2 \sin x)$, $Q = (2y \cos x - x^2 \sin y)$. Проверить независимость от пути интегрирования:
+
+$\frac{\delta P}{\delta y} = -2x \sin y - 2 y \sin x$, $\frac{\delta Q}{\delta x} = -2y \sin x = -2x\sin y$.
+
+Видим, что \textbf{равенство выполняется}.
+
+\paragraph{Пример №4}
+
+\begin{equation}
+    \begin{cases}
+        x = \phi(t) = 2 \cos t \ x' = -2 \sin t \\
+        y = \psi(t) = 2 \sin t \ y' = 2 \cos t \\
+        t \in [0; 2\pi]
+    \end{cases}
+\end{equation}
+
+$\oint y^2 \diff x + 2 x y \diff y = \int\limits_{t_1}^{t_2} [P(x(t), y(t)) x'(t) \diff t + Q(x(t), y(t)) y'(t)] \diff t = \int\limits_{0}^{2 \pi} (4 \sin^2 t (-2 \sin t) + 2 2 \cos t 2 \sin t 2 \cos t) \diff t = 8 \int\limits_{0}^{2 \pi} \sin t (-\sin^2 t + 2 \cos^2 t) \diff t = -8 \int\limits_{0}^{2 \pi} (-1 + 3\cos^2 t) \diff \cos t = 8 \int\limits_{0}^{2 \pi} (1 - 3 \cos^2 t) \diff \cos t = 8 (\cos t - \frac{3 \cos^3 t}{3}) \bigg|_{0}^{2 \pi} = 0$
+
+
+Мы в самом начале могли проверить:
+
+$\frac{\delta P}{\delta y} = \frac{\delta Q}{\delta x} = 2y$ — следовательно, интеграл по замкнутому контуру равен нулю, и не считать все то, что мы все же посчитали.
+
+\paragraph{Пример №5}
+
+$\oint\limits_{D} x^2 \cos y \diff x + 3y^3 x \diff y = \int\limits_{OA} (\dots) + \int\limits_{AB} (\dots) + \int\limits_{BO} (\dots) = \int\limits_{0}^{1} (x^2 \cos x + 3x^3) \diff x + \int\limits_{1}^{0} (x^2 \cos (2 - x) - 3 (2 - x)^3 x) \diff x + 0 = \dots$. Дальнейшее решение оставляется в качестве упражнения читателю.
+
+Но можно было пойти другим путем: посчитать $\frac{\delta Q}{\delta x} = 2 x \cos y$, $\frac{\delta P}{\delta y} = 9 y^2 x$, так что $\int\int (\frac{\delta Q}{\delta x} - \frac{\delta P}{\delta y}) \diff x \diff y = \int\limits_{0}^{G_1} \diff x \int\limits_{x}^{2 - x} (2x \cos y - 9y^2 x) \diff y = 2 x \sin y - \frac{9 y^3}{3} x \bigg|_{y = x}^{2 - x} = 2 x \sin (2 - x) - 3 (2 - x)^3 x - 2x \sin x - 3x^4$ — далее это нужно интегрировать по $x$.
+
+\end{document}
