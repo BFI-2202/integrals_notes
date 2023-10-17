@@ -1,0 +1,342 @@
+\documentclass{article}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+
+\usepackage{tabularx}
+\usepackage{amsmath}
+\usepackage{pgfplots}
+\usepackage{geometry}
+\usepackage{multicol}
+\geometry{
+    left=1cm,right=1cm,top=2cm,bottom=2cm
+}
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+
+\newtheorem{definition}{Определение}
+\newtheorem{theorem}{Теорема}
+
+\DeclareMathOperator{\sign}{sign}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks, citecolor=black, filecolor=black, linkcolor=black, urlcolor=black
+}
+
+\title{Интегралы и дифференциальные уравнения}
+\author{Лисид Лаконский}
+\date{October 2023}
+
+\begin{document}
+\raggedright
+
+\maketitle
+
+\tableofcontents
+\pagebreak
+
+\section{Практическое занятие — 17.10.2023}
+
+\subsection{Дифференциальные уравнения}
+
+\begin{definition}
+    \textbf{Дифференциальным уравнением} называется уравнение, связывающее независимую переменную $x$, искомую функцию $y$ и ее какие-то производные:
+    $$
+    F(x, y, y', y'', \dots) = 0
+    $$
+    \textbf{Обыкновенное дифференциальное уравнение}:
+    $$
+    y' = f(x)
+    $$
+    \textbf{Дифферециальное уравнение в частных производных}:
+    $$
+    y' = f(x, t)
+    $$
+\end{definition}
+
+\begin{definition}
+    \textbf{Порядком} в дифференциальном уравнении называется порядок наивысшей производной, входящей в это уравнение.
+\end{definition}
+
+\begin{definition}
+    \textbf{Решением} (интегралом) дифференциального уравнения называется всякая функция, которая будучи подставлена в уравнение обращает его в верное равенство.
+\end{definition}
+
+\paragraph{Пример №1}
+
+Пусть
+
+$$y'' - y = 0$$
+
+Проверим:
+
+\begin{enumerate}
+    \item $y = x$
+
+    $y' = 1$, $y'' = 0$
+
+    Таким образом, не является решением.
+    \item $y = \sin x$
+
+    $y' = \cos x$, $y'' = -\sin x$
+
+    Таким образом, не является решением
+    \item $y = e^{x}$
+
+    $y' = e^{x}$, $y'' = e^{x}$
+
+    Является решением.
+\end{enumerate}
+
+\begin{definition}
+    \textbf{Общим решением} дифференциального уравнения называется функция $y = \phi(x; C)$ ($C = const$), которая
+    
+    \begin{enumerate}
+        \item удовлетворяет дифференциальному уравнению при любом значении $C$;
+        \item каково бы не было начальное условие, всегда можно подобрать значение $C_0$, чтобы оно удовлетворяло указанному начальному условию.
+    \end{enumerate}
+\end{definition}
+
+\paragraph{Пример №1}
+
+$y = x^2 + C$
+
+$y(0) = 4$
+
+$y = x^2 + 4$ — Решение задачи Коши, удовлетворяет нач. усл.
+
+\paragraph{Пример №2}
+
+Найти уравнение кривой, у которой точка пересечения любой касательной с осью $OX$ $K$ равноудалена от нач. координат $O$ и от точки касания $M(x, y)$.
+
+Условие, которое должно быть выполнено: $|OK| = |OM|$
+
+Уравнение касательной:
+
+$Y - y = y' (X - x)$
+
+В т.к $Y = 0$, получаем:
+
+$-y = y'(X - x) \Leftrightarrow x - \frac{y}{y'} = X$. Таким образом, можем теперь задать коордианты т. K: $(x - \frac{y}{y'}; 0)$
+
+$|OK| = |x - \frac{y}{y'}|$
+
+$|KM| = \sqrt{(x - (x - \frac{y}{y'}))^2 + (y - 0)^2}$
+
+$|x - \frac{y}{y'}| = \sqrt{(\frac{y}{y'})^2 + y^2}$
+
+$x^2 - \frac{2xy}{y'} + (\frac{y}{y'})^2 = (\frac{y}{y'})^2 + y^2$
+
+$-\frac{2xy}{y'} = -y^2 + x^2$
+
+$y' = \frac{2xy}{x^2-y^2}$ — Дифференциальное уравнение (I порядок)
+
+\paragraph{Геометрическая интерпретация решения дифференциального уравнения}
+
+Общее решение (общий интеграл) представляет собой семейство кривых на координатной плоскости, а решение задачи Коши представляет собой кривую, проходящую через заданную точку.
+
+\subsubsection{Теорема о существовании и единственности решения}
+
+\begin{theorem}[О существовании и единственности решения]
+    Пусть в дифференциальном уравнении $y' = F(x, y)$ функция $F(x, y)$ и ее частная производная $\frac{\delta f}{\delta y}$ непрерывны на открытом множестве $G$. В этом случае
+    \begin{enumerate}
+        \item Для всякой точки $(x_0, y_0) \in G$ найдется решение $y = y(x)$ дифференциального уравнения $y' = f(x, y)$, удовлетворяющее условию $y_0 = y(x_0)$ (решение задачи Коши).
+        \item Если два решения ($y = y_1(x)$, $y = y_2(x)$) дифференциального уравнения $y' = F(x, y)$ совпадают хотя бы для одного решения $x^{*}$. то эти решения совпадают для всех тех значений переменной $x$, для которой они определены.
+    \end{enumerate}
+\end{theorem}
+
+\subsubsection{Дифференциальный уравнения (I порядок) с разделенными или разделяющимися переменными}
+
+Дифференциальное уравнение (I порядок) может быть записано:
+
+\begin{enumerate}
+    \item $y' = f(x; y)$
+    \item $p(x; y) \diff x + q(x, y) \diff y = 0$
+\end{enumerate}
+
+\begin{definition}
+    \textbf{Уравнением с разделяющимися переменными} называют дифференциальное уравнение, в котором функция $f$ может быть разбита на две такие функции, разделенные знаками умножения или деления, что одна из них зависит только от $x$, а другая зависит только от $x$.
+
+    $$y' = f_1(x) * f_2(y) \ \ \textbf{(1)}$$
+    $$p_1(x) * p_2(y) + q_1(x) * q_2(y) \diff y = 0 \ \ \textbf{(2)}$$
+\end{definition}
+
+Разделение переменных:
+
+\begin{enumerate}
+    \item $\frac{\diff y}{\diff x} = f_1(x) * f_2(y)$
+
+    $\frac{\diff y}{f_2(y)} = f_1(x) \diff x$
+    \item $p_1(x) p_2(y) \diff x = -q_1(x) q_2(y) \diff y$
+
+    $\frac{p_1(x) \diff x}{q_1(x)} = -\frac{q_2(y) \diff y}{p_2(y)}$
+\end{enumerate}
+
+После этого мы можем интегрировать левую и правую часть:
+
+\begin{enumerate}
+    \item $\int \frac{\diff y}{f_2(y)} = \int f_1(x) \diff x$
+    \item $\int \frac{p_1(x) \diff x}{q_1(x)} = -\int \frac{q_2(y) \diff y}{p_2(y)}$
+\end{enumerate}
+
+Получим:
+
+\begin{enumerate}
+    \item $\Phi_2(y) = \Phi_1(x) + C$
+
+    или
+
+    $\Phi_2(y) - \Phi_1(x) = C$
+    \item $F_1(x) = F_2(y) + C$
+\end{enumerate}
+
+\paragraph{Пример №1}
+
+$\sqrt{y^2 + 1} \diff x = xy \diff y$
+
+Выполним разделение переменных:
+
+$\frac{\diff x}{x} = \frac{y \diff y}{\sqrt{y^2 + 1}}$
+
+Интегрируем полученное:
+
+$\int \frac{\diff x}{x} = \int \frac{y \diff y}{\sqrt{y^2 + 1}}$
+
+$\ln |x| = (y^2 + 1)^{-\frac{1}{2}} (y^2 + 1)$
+
+$\ln |x| = \frac{1}{2} \frac{(y^2 + 1)^{1/2}}{1/2} + C$
+
+$\ln |x| = (y^2 + 1)^{1/2} + C$
+
+\textbf{Ответ}: $\ln Cx = \sqrt{y^2 + 1}$
+
+\paragraph{Замечание о приведении к уравнениям с разделющимися переменными}
+
+Уравнение вида $y' = f(ax + by + c)$ можно привести заменой $z = ax + by$ или $ax + by + C$ к уравнению с разделяющимися переменными.
+
+\paragraph{Пример №2}
+
+$(x + 2y) y' = 1$
+
+$y' = \frac{1}{x + 2y}$
+
+Заменим: $z = x + 2y$
+
+$\frac{z - x}{2} = y$
+
+$\frac{z' - 1}{2} = y'$
+
+$\frac{z' - 1}{2} = \frac{1}{z}$
+
+$\frac{\diff z}{\diff x} = z' = \frac{2}{z} + 1 = \frac{2 + z}{z}$
+
+$\frac{z}{z + 2} \diff z = \diff x$
+
+Переменные теперь разделены и их можно проинтегрировать:
+
+$\int \frac{z + 2 - 2}{z + 2} \diff z = \int \diff x$
+
+$\int (1 - \frac{2}{z + 2}) \diff z = \int \diff x$
+
+$\int \frac{\diff z}{z + 2} = \ln |z + 2|$, $\int \diff z = 2$
+
+$z - 2 \ln |z + 2| = x + C$
+
+$x + 2y - 2 \ln |x + 2y + 2| = x + C$
+
+\textbf{Ответ:} $2y - 2 \ln |x + 2y + 2| = C$
+
+\subsubsection{Однородные дифференциальные уравнения (I порядок)}
+
+\begin{definition}
+    \textbf{Функция $f(x y)$ называется однородной функцией} $n$-го измерения относительно переменных $x$ и $y$, если для любой $\lambda$ справедливо следующее:
+    $$
+    f(\lambda x, \lambda y) = \lambda^{n} f(x; y)
+    $$
+\end{definition}
+
+Пример однородной функции второго измерения:
+
+$$f(x, y) = \sqrt[3]{x^6 + y^6}$$
+
+$$f(\lambda x, \lambda y) = \sqrt[3]{\lambda^6 x^6 + \lambda^6 y^6} = \sqrt[3]{\lambda^6 (x^6 + y^6)} = \lambda^2 \sqrt{x^6 + y^6}$$
+
+Пример функции, не являющейся однородной:
+
+$$f(x, y) = \sqrt[3]{x^6 + y^3}$$
+
+$$f(\lambda x, \lambda y) = \sqrt[3]{\lambda^6 x^6 + \lambda^3 y^3} = \lambda^3 \sqrt{\lambda^3 x^3 + y^6}$$
+
+\begin{definition}
+    \textbf{Дифференциальное уравнение (I порядок) называется однородным} относительно $x$ и $y$, если $f(x, y)$ является однородной функцией нулевого измерения:
+
+    $$f(\lambda x, \lambda y) = \lambda^{0} f(x, y)$$
+\end{definition}
+
+Пример однородного дифференциального уравнения:
+
+$$f(x, y) = \frac{x^2 - y^2}{2xy}$$
+
+$$f(\lambda x, \lambda y) = \frac{\lambda^2 x^2 - \lambda^2 y^2}{2 \lambda x \lambda y} = \frac{x^2 - y^2}{2xy}$$
+
+\paragraph{Решение однородных дифференциальных уравнений (I порядок)} 
+
+Необходимо заменить:
+
+$$t = \frac{y}{x}$$
+
+$$y = tx$$
+
+$$y' = t' x + t$$
+
+Получим:
+
+$$t' * x + t = f(t)$$
+
+$$t' * x = f(t) - t$$
+
+$$\frac{\diff t}{\diff x} * x = f(t) - t$$
+
+$$\int \frac{\diff t}{f(t) - t} = \int \frac{\diff x}{x}$$
+
+Переменные разделились и мы интегрируем, не забывая обратно заменить $t$.
+
+\paragraph{Пример №1}
+
+$y' = \frac{x + 2y}{x}$
+
+$y' = 1 + 2 * \frac{y}{x}$
+
+Заменим:
+
+$t = \frac{y}{x}$, $y = tx$, $y' = t' x + t$
+
+Получим:
+
+$t'x + t = 1 + 2t$
+
+$t' * x = 1 + t$
+
+$\frac{\diff t}{\diff x} * x = 1 + t$
+
+Выполним окончательное разделение:
+
+$\frac{\diff t}{t + 1} = \frac{\diff x}{x}$
+
+Теперь мы можем интегрировать:
+
+$\int \frac{\diff t}{t + 1} = \int \frac{\diff x}{x}$
+
+$\ln |t + 1| = \ln |x| + \ln C$
+
+$\ln |t + 1| = \ln Cx$
+
+$t + 1 = Cx$
+
+$\frac{y}{x} = Cx - 1$
+
+\textbf{Ответ:} $y = Cx^2 - x$
+
+
+\end{document}
