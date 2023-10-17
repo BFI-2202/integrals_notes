@@ -1,0 +1,266 @@
+\documentclass{article}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+
+\usepackage{tabularx}
+\usepackage{amsmath}
+\usepackage{pgfplots}
+\usepackage{geometry}
+\usepackage{multicol}
+\geometry{
+    left=1cm,right=1cm,top=2cm,bottom=2cm
+}
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+
+\newtheorem{definition}{Определение}
+\newtheorem{theorem}{Теорема}
+
+\DeclareMathOperator{\sign}{sign}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks, citecolor=black, filecolor=black, linkcolor=black, urlcolor=black
+}
+
+\title{Интегралы и дифференциальные уравнения}
+\author{Лисид Лаконский}
+\date{October 2023}
+
+\begin{document}
+\raggedright
+
+\maketitle
+
+\tableofcontents
+\pagebreak
+
+\section{Практическое занятие — 05.10.2023}
+
+\subsection{Двойные и тройные интегралы}
+
+\subsubsection{№3618}
+
+Сфера $x^2 + y^2 + z^2 = 4 R z - 3R^2$
+
+Конус $z^2 = 4 (x^2 + y^2)$
+
+$x^2 + y^2 + z^2 - 4Rz+4R^2 = 4R^2 - 3R^2$
+
+$x^2 + y^2 + (z - 2R)^2 = R^2$
+
+$\rho^2 \cos^2 \phi + \rho^2 \sin^2 \phi + z^2 = 4 R z - 3R^2$
+
+$\rho^2 + z^2 - 4 R z + 4 R^2 = R^2$
+
+$\rho^2 + (z - 2R)^2 = R^2$
+
+$z = 2R \pm \sqrt{R^2 - \rho^2}$
+
+$V_1 = \int\limits_{0}^{2 \pi} \diff \phi \int\limits_{0}^{R} \rho \diff \rho \int\limits_{2 \rho}^{2 R + \sqrt{R^2 - \rho^2}} \diff z$
+
+$\int\limits_{0}^{R} (2R + \sqrt{R^2 -\rho^2} - 2 \rho) \rho \diff \rho = (\frac{2R \rho^2}{2}) \bigg|{0}^{R} - \frac{2 \rho^3}{3} \bigg|_{0}^{R} - \frac{1 (R^2 - \rho^2)^{3/2}}{3} \bigg|_{0}^{R} = \frac{1}{3} R^3 + \frac{1}{3} R^3 = \frac{2}{3} R^3$
+
+$V_1 = \frac{4 \pi R^3}{3}$
+
+$V_2 = \int\limits_{0}^{2 \pi} \diff \phi \int\limits_{0}^{\frac{3}{5} R} \rho \diff \rho \int\limits_{2 \rho}^{2 R - \sqrt{R^2 - \rho^2}} \diff z$
+
+\begin{enumerate}
+    \item $\int\limits_{2 \rho}^{2 R - \sqrt{R^2 - \rho^2}} \diff z = (z) \bigg|_{2 \rho}^{2 R - \sqrt{R^2 - \rho^2}} = (2R - \sqrt{R^2 - \rho^2}) - (2 \rho) = 2R - \sqrt{R^2 - \rho^2} - 2\rho$
+    \item $\dots$
+    \item $\dots$
+\end{enumerate}
+
+Далее вычисляем, вычитаем что надо из чего надо, и все должно быть в порядке.
+
+\subsection{Криволинейные интегралы}
+
+$\int\limits_{A}^{B} P(x, y) \diff x + Q(x, y) \diff y = \int\limits_{t_{A}}^{t_{B}} (P(x(t), y(t)) x'_t + Q(x(t), y(t)) y'_t) \diff t$
+
+\begin{equation}
+    \begin{cases}
+        x = x(t) \ \diff x = x'_t \diff t \\
+        y = y(t) \ \diff y = y'_t \diff t
+    \end{cases}
+\end{equation}
+
+Если же имеем декартовы координаты, например:
+
+\begin{equation}
+    \begin{cases}
+        x = x \\
+        y = y(x) \ \diff y = y'_x \diff x
+    \end{cases}
+\end{equation}
+
+Тогда:
+
+$\int\limits_{A}^{B} P(x, y) \diff x + Q(x, y) \diff y = \int\limits_{x_{A}}^{x^{B}} (P(x, y(x)) + Q(x, y(x)) y'_x) \diff x$
+
+\subsubsection{№3811}
+
+$\int\limits_{(0, 0)}^{(1, 1)} x y \diff x + (y - x) \diff y$
+
+По следующим кривым:
+
+\begin{enumerate}
+    \item $y = x$
+    
+    $\int\limits_{(0, 0)}^{(1, 1)} xy \diff x + (y - x) \diff y = \int\limits_{0}^{1} (x^2 + (x - x) 2x) \diff x = \int\limits_{0}^{1} (x^2) \diff x = \frac{x^3}{3} \bigg|_{0}^{1} = \frac{1}{3}$
+    \item $y = x^2$
+    
+    $\int\limits_{(0, 0)}^{(1, 1)} x y \diff x + (y - x) \diff y = \int\limits_{0}^{1} (x * x^2 + (x^2 - x) 2x) \diff x = (\frac{3x^4}{4} - \frac{2x^3}{3}) \bigg|_{0}^{1} = \frac{3}{4} - \frac{2}{3} = \frac{1}{12}$
+\end{enumerate}
+
+\subsubsection{№3815}
+
+Вычислить $\int \frac{y^2 \diff x - x^2 \diff y}{x^2 + y^2}$ по $L$:
+
+\begin{equation}
+    \begin{cases}
+        x = 2 \cos t \ x' = - 2 \sin t \\
+        y = 2 \sin t \ y' = 2 \cos t \\
+        0 \le t \le \pi
+    \end{cases}
+\end{equation}
+
+$\int \frac{y^2 \diff x - x^2 \diff y}{x^2 + y^2} = \int\limits_{0}^{\pi} \frac{(4 \sin^2 t (-2 \sin t)) - (4 \cos^2 t (2 \cos t))}{4 \cos^2 t + 4 \sin^2 t} = 2 \int\limits_{0}^{\pi} (1 - \cos^2 t) \diff (\cos t) - (1 - \sin^2 t) \diff (\sin t) = 2 ((\cos t - \frac{\cos^3 t}{3}) - (\sin t - \frac{\sin^3 t}{3})) \bigg|_{0}^{\pi} = 2 (-1 + \frac{1}{3} - 0 + 0 - (1 - \frac{1}{3} - 0 + 0)) = 2 (-\frac{2}{3} - \frac{2}{3}) = 2(-\frac{4}{3}) = -\frac{8}{3}$
+
+\subsubsection{№3812}
+
+Вычислить $\int\limits_{(0; 0)}^{(1,1)} 2xy \diff x + x^2 \diff y$ по $L$:
+
+\begin{enumerate}
+    \item 
+
+    $\begin{cases}
+        y = x \\
+        y' = 1
+    \end{cases}$
+
+    $\int\limits_{(0; 0)}^{(1,1)} 2xy \diff x + x^2 \diff y = \int\limits_{0}^{1} (2x^2 + x^2) \diff x = (\frac{2x^3}{3} + \frac{x^3}{3}) \bigg|_{0}^{1} = \frac{2}{3} + \frac{1}{3} = 1$
+    
+    \item 
+
+    $\begin{cases}
+        y = x^2 \\
+        y' = 2x
+    \end{cases}$
+
+    $\int\limits_{(0; 0)}^{(1,1)} 2xy \diff x + x^2 \diff y = \int\limits_{0}^{1} (2x^3 + 2x^3) \diff x = \int\limits_{0}^{1} (4x^3) \diff x = \frac{4x^4}{4} \bigg|_{0}^{1} = 1$
+
+    \item
+
+    $\begin{cases}
+        y = x^3 \\
+        y' = 3x^2
+    \end{cases}$
+
+    $\int\limits_{(0; 0)}^{(1,1)} 2xy \diff x + x^2 \diff y = \int\limits_{0}^{1} (2x^4 + x^2 * (3x^2)) \diff x = \int\limits_{0}^{1} (2x^4 + 3x^{4}) = (\frac{2x^5}{5} + \frac{3x^5}{5}) \bigg|_{0}^{1} = \frac{2}{5} + \frac{3}{5} = 1$
+\end{enumerate}
+
+\subsection{Восстановление функции по ее полному дифференциалу}
+
+$\diff u = P \diff x + Q \diff y$, $P = \frac{\delta u}{\delta x}$, $Q = \frac{\delta u}{\delta y}$
+
+$P = \frac{\delta u}{\delta x}$, $u = \int P \diff x = F(x, y) + C(y)$
+
+$\frac{\delta u}{\delta y} = \frac{\delta F}{\delta y} + \frac{\delta C}{\delta y} = Q$, $C = C(y)$
+
+\paragraph{Пример №1}
+
+$\diff u = x^2 \diff x + y^2 \diff x$
+
+$x^2 = \frac{\delta u}{\delta x}$, $y^2 = \frac{\delta u}{\delta y}$
+
+$u = \int x^2 \diff x = \frac{x^3}{3} + C(y)$
+
+$\frac{\delta u}{\delta y} + \frac{\delta C}{\delta x} = y^2$
+
+$C(y) = \int y^2 \diff y = \frac{y^3}{3} + K$
+
+$u = \frac{x^3}{3} + \frac{y^3}{3} + K$
+
+\subsubsection{№3846}
+
+$\diff u = (4x^3 - 4y^2 x) \diff x - (4x^2 y - 4y^3) \diff y$
+
+$u = \int (4x^3 - 4y^2 x) \diff x = \frac{4x^4}{4} - \frac{4y^2 x^2}{2} = x^4 - 2y^2 x^2 + C(y)$
+
+$\frac{\diff u}{\diff y} = -4yx^2 + \frac{\diff C}{\diff y} = -4x^2 y + 4y^3$
+
+$\frac{\diff C}{\diff y} = 4y^3$
+
+$C(y) = 4y^3 \diff y = \frac{4y^4}{4} = y^4 + K$
+
+\textbf{Ответ:} $u = x^3 - 2y^2 x^2 + y^4 + K$
+
+\subsubsection{№3847}
+
+$\diff u = \frac{(x + 2y) \diff x + y \diff y}{(x + y)^2} = \frac{x + 2y}{(x+y)^2} \diff x + \frac{y}{(x + y)^2} \diff y$
+
+Ненужный шаг, мы зря начали это считать: $\frac{\diff P}{\diff y} = \frac{2(x + y)^2 - 2(x + 2y)(x + y)}{(x + y)^4} = \frac{2(x + y - x - 2y)}{(x+y)^3} = -\frac{2y}{(x + y)^3}$, проверим другую частную производную: $\frac{\diff Q}{\diff x} = \frac{-2y(x + y)}{(x+y)^3} = \frac{-2y}{(x+y)^3}$. Они совпадают, значит мы можем решать.
+
+$u = \int \frac{x + y + y}{(x+y)^2} \diff x = \int \frac{x + y}{(x + y)^2} + \int \frac{y}{(x + y)^2} \diff x = \int \frac{\diff (x + y)}{x + y} + y \int \frac{d(x + y)}{(x + y)^2} = \ln |x + y| - \frac{y}{x + y} + C(y)$
+
+$\frac{\diff u}{\diff y} = \frac{1}{x + y} - \frac{(x + y) - y}{(x + y)^2} + \frac{\diff C}{\diff y} = \frac{1}{x + y} - \frac{x}{(x + y)^2} + \frac{\diff C}{\diff y} = \frac{y}{(x + y)^2}$
+
+$\frac{\diff C}{\diff y} = \frac{x + y}{(x + y)^2} - \frac{1}{x + y} = \frac{1}{x + y} - \frac{1}{x + y} = 0$
+
+$C(y) = C$
+
+\textbf{Ответ}: $u = \ln |x + y| - \frac{y}{x + y} + C$
+
+\subsection{Вычисление криволинейных интегралов от полных дифференциалов}
+
+\paragraph{Пример №1} $\int\limits_{(0; 0)}^{(2; 1)} 2 xy \diff x + x^2 \diff y$
+
+Возможны несколько вариантов:
+
+\begin{enumerate}
+    \item Восстановить полный дифференциал, после чего вычислить:
+    
+    $\int\limits_{A}^{B} \diff u = u(B) - u(A)$
+    \item Так как путь интегрирования не имеет значения, можем сами его выбирать. Например:
+    
+    $AO: \begin{cases}
+        y = 0 \\
+        \diff y = 0
+    \end{cases}, AB: \begin{cases}
+        x = 2 \\
+        \diff x = 0
+    \end{cases}$
+
+    $\int\limits_{(0; 0)}^{(2; 1)} 2 xy \diff x + x^2 \diff y = \int\limits_{0}^{2} 2x * 0 \diff x + \int\limits_{0}^{1} 4 \diff y = 0 + 4y \bigg|_{0}^{1} = 0 + 4 = 4$
+\end{enumerate}
+
+\subsubsection{№3840}
+
+$\int\limits_{(3;4)}^{(5;12)} \frac{x \diff x}{x^2 + y^2} + \frac{y \diff y}{x^2 + y^2}$
+
+Проверим:
+
+$\frac{\diff P}{\diff y} = \frac{0 - 2xy}{(x^2 + y^2)^2}$
+
+$\frac{\diff Q}{\diff x} = \frac{0 - 2xy}{(x^2 + y^2)^2}$
+
+Пойдем по второму пути:
+
+$AD: \begin{cases}
+    x = 3 \\
+    \diff x = 0
+\end{cases}$
+
+$DB: \begin{cases}
+    y = 12 \\
+    \diff y = 0
+\end{cases}$
+
+$\int\limits_{4}^{12} (\frac{y}{9 + y^2}) \diff y = (\frac{1}{2} \ln |y^2 + 9|) \bigg|_{4}^{12} = (\frac{1}{2} \ln |144 + 9|) - (\frac{1}{2} \ln |16 + 9|)$
+
+$\int\limits_{3}^{5} (\frac{x}{x^2 + 144}) \diff x = (\frac{1}{2} \ln |x^2 + 144|) \bigg|_{3}^{5} = (\frac{1}{2} \ln |25 + 144|) - (\frac{1}{2} \ln |9 + 144|)$
+
+$\int\limits_{(3;4)}^{(5;12)} \frac{x \diff x}{x^2 + y^2} + \frac{y \diff y}{x^2 + y^2} = \frac{1}{2} (\ln|169| - \ln |25|)$
+
+\end{document}
