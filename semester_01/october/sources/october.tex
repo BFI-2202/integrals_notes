@@ -141,4 +141,533 @@ $\oint\limits_{D} x^2 \cos y \diff x + 3y^3 x \diff y = \int\limits_{OA} (\dots)
 
 Но можно было пойти другим путем: посчитать $\frac{\delta Q}{\delta x} = 2 x \cos y$, $\frac{\delta P}{\delta y} = 9 y^2 x$, так что $\int\int (\frac{\delta Q}{\delta x} - \frac{\delta P}{\delta y}) \diff x \diff y = \int\limits_{0}^{G_1} \diff x \int\limits_{x}^{2 - x} (2x \cos y - 9y^2 x) \diff y = 2 x \sin y - \frac{9 y^3}{3} x \bigg|_{y = x}^{2 - x} = 2 x \sin (2 - x) - 3 (2 - x)^3 x - 2x \sin x - 3x^4$ — далее это нужно интегрировать по $x$.
 
+\section{Практическое занятие — 05.10.2023}
+
+\subsection{Двойные и тройные интегралы}
+
+\subsubsection{№3618}
+
+Сфера $x^2 + y^2 + z^2 = 4 R z - 3R^2$
+
+Конус $z^2 = 4 (x^2 + y^2)$
+
+$x^2 + y^2 + z^2 - 4Rz+4R^2 = 4R^2 - 3R^2$
+
+$x^2 + y^2 + (z - 2R)^2 = R^2$
+
+$\rho^2 \cos^2 \phi + \rho^2 \sin^2 \phi + z^2 = 4 R z - 3R^2$
+
+$\rho^2 + z^2 - 4 R z + 4 R^2 = R^2$
+
+$\rho^2 + (z - 2R)^2 = R^2$
+
+$z = 2R \pm \sqrt{R^2 - \rho^2}$
+
+$V_1 = \int\limits_{0}^{2 \pi} \diff \phi \int\limits_{0}^{R} \rho \diff \rho \int\limits_{2 \rho}^{2 R + \sqrt{R^2 - \rho^2}} \diff z$
+
+$\int\limits_{0}^{R} (2R + \sqrt{R^2 -\rho^2} - 2 \rho) \rho \diff \rho = (\frac{2R \rho^2}{2}) \bigg|{0}^{R} - \frac{2 \rho^3}{3} \bigg|_{0}^{R} - \frac{1 (R^2 - \rho^2)^{3/2}}{3} \bigg|_{0}^{R} = \frac{1}{3} R^3 + \frac{1}{3} R^3 = \frac{2}{3} R^3$
+
+$V_1 = \frac{4 \pi R^3}{3}$
+
+$V_2 = \int\limits_{0}^{2 \pi} \diff \phi \int\limits_{0}^{\frac{3}{5} R} \rho \diff \rho \int\limits_{2 \rho}^{2 R - \sqrt{R^2 - \rho^2}} \diff z$
+
+\begin{enumerate}
+    \item $\int\limits_{2 \rho}^{2 R - \sqrt{R^2 - \rho^2}} \diff z = (z) \bigg|_{2 \rho}^{2 R - \sqrt{R^2 - \rho^2}} = (2R - \sqrt{R^2 - \rho^2}) - (2 \rho) = 2R - \sqrt{R^2 - \rho^2} - 2\rho$
+    \item $\dots$
+    \item $\dots$
+\end{enumerate}
+
+Далее вычисляем, вычитаем что надо из чего надо, и все должно быть в порядке.
+
+\subsection{Криволинейные интегралы}
+
+$\int\limits_{A}^{B} P(x, y) \diff x + Q(x, y) \diff y = \int\limits_{t_{A}}^{t_{B}} (P(x(t), y(t)) x'_t + Q(x(t), y(t)) y'_t) \diff t$
+
+\begin{equation}
+    \begin{cases}
+        x = x(t) \ \diff x = x'_t \diff t \\
+        y = y(t) \ \diff y = y'_t \diff t
+    \end{cases}
+\end{equation}
+
+Если же имеем декартовы координаты, например:
+
+\begin{equation}
+    \begin{cases}
+        x = x \\
+        y = y(x) \ \diff y = y'_x \diff x
+    \end{cases}
+\end{equation}
+
+Тогда:
+
+$\int\limits_{A}^{B} P(x, y) \diff x + Q(x, y) \diff y = \int\limits_{x_{A}}^{x^{B}} (P(x, y(x)) + Q(x, y(x)) y'_x) \diff x$
+
+\subsubsection{№3811}
+
+$\int\limits_{(0, 0)}^{(1, 1)} x y \diff x + (y - x) \diff y$
+
+По следующим кривым:
+
+\begin{enumerate}
+    \item $y = x$
+    
+    $\int\limits_{(0, 0)}^{(1, 1)} xy \diff x + (y - x) \diff y = \int\limits_{0}^{1} (x^2 + (x - x) 2x) \diff x = \int\limits_{0}^{1} (x^2) \diff x = \frac{x^3}{3} \bigg|_{0}^{1} = \frac{1}{3}$
+    \item $y = x^2$
+    
+    $\int\limits_{(0, 0)}^{(1, 1)} x y \diff x + (y - x) \diff y = \int\limits_{0}^{1} (x * x^2 + (x^2 - x) 2x) \diff x = (\frac{3x^4}{4} - \frac{2x^3}{3}) \bigg|_{0}^{1} = \frac{3}{4} - \frac{2}{3} = \frac{1}{12}$
+\end{enumerate}
+
+\subsubsection{№3815}
+
+Вычислить $\int \frac{y^2 \diff x - x^2 \diff y}{x^2 + y^2}$ по $L$:
+
+\begin{equation}
+    \begin{cases}
+        x = 2 \cos t \ x' = - 2 \sin t \\
+        y = 2 \sin t \ y' = 2 \cos t \\
+        0 \le t \le \pi
+    \end{cases}
+\end{equation}
+
+$\int \frac{y^2 \diff x - x^2 \diff y}{x^2 + y^2} = \int\limits_{0}^{\pi} \frac{(4 \sin^2 t (-2 \sin t)) - (4 \cos^2 t (2 \cos t))}{4 \cos^2 t + 4 \sin^2 t} = 2 \int\limits_{0}^{\pi} (1 - \cos^2 t) \diff (\cos t) - (1 - \sin^2 t) \diff (\sin t) = 2 ((\cos t - \frac{\cos^3 t}{3}) - (\sin t - \frac{\sin^3 t}{3})) \bigg|_{0}^{\pi} = 2 (-1 + \frac{1}{3} - 0 + 0 - (1 - \frac{1}{3} - 0 + 0)) = 2 (-\frac{2}{3} - \frac{2}{3}) = 2(-\frac{4}{3}) = -\frac{8}{3}$
+
+\subsubsection{№3812}
+
+Вычислить $\int\limits_{(0; 0)}^{(1,1)} 2xy \diff x + x^2 \diff y$ по $L$:
+
+\begin{enumerate}
+    \item 
+
+    $\begin{cases}
+        y = x \\
+        y' = 1
+    \end{cases}$
+
+    $\int\limits_{(0; 0)}^{(1,1)} 2xy \diff x + x^2 \diff y = \int\limits_{0}^{1} (2x^2 + x^2) \diff x = (\frac{2x^3}{3} + \frac{x^3}{3}) \bigg|_{0}^{1} = \frac{2}{3} + \frac{1}{3} = 1$
+    
+    \item 
+
+    $\begin{cases}
+        y = x^2 \\
+        y' = 2x
+    \end{cases}$
+
+    $\int\limits_{(0; 0)}^{(1,1)} 2xy \diff x + x^2 \diff y = \int\limits_{0}^{1} (2x^3 + 2x^3) \diff x = \int\limits_{0}^{1} (4x^3) \diff x = \frac{4x^4}{4} \bigg|_{0}^{1} = 1$
+
+    \item
+
+    $\begin{cases}
+        y = x^3 \\
+        y' = 3x^2
+    \end{cases}$
+
+    $\int\limits_{(0; 0)}^{(1,1)} 2xy \diff x + x^2 \diff y = \int\limits_{0}^{1} (2x^4 + x^2 * (3x^2)) \diff x = \int\limits_{0}^{1} (2x^4 + 3x^{4}) = (\frac{2x^5}{5} + \frac{3x^5}{5}) \bigg|_{0}^{1} = \frac{2}{5} + \frac{3}{5} = 1$
+\end{enumerate}
+
+\subsection{Восстановление функции по ее полному дифференциалу}
+
+$\diff u = P \diff x + Q \diff y$, $P = \frac{\delta u}{\delta x}$, $Q = \frac{\delta u}{\delta y}$
+
+$P = \frac{\delta u}{\delta x}$, $u = \int P \diff x = F(x, y) + C(y)$
+
+$\frac{\delta u}{\delta y} = \frac{\delta F}{\delta y} + \frac{\delta C}{\delta y} = Q$, $C = C(y)$
+
+\paragraph{Пример №1}
+
+$\diff u = x^2 \diff x + y^2 \diff x$
+
+$x^2 = \frac{\delta u}{\delta x}$, $y^2 = \frac{\delta u}{\delta y}$
+
+$u = \int x^2 \diff x = \frac{x^3}{3} + C(y)$
+
+$\frac{\delta u}{\delta y} + \frac{\delta C}{\delta x} = y^2$
+
+$C(y) = \int y^2 \diff y = \frac{y^3}{3} + K$
+
+$u = \frac{x^3}{3} + \frac{y^3}{3} + K$
+
+\subsubsection{№3846}
+
+$\diff u = (4x^3 - 4y^2 x) \diff x - (4x^2 y - 4y^3) \diff y$
+
+$u = \int (4x^3 - 4y^2 x) \diff x = \frac{4x^4}{4} - \frac{4y^2 x^2}{2} = x^4 - 2y^2 x^2 + C(y)$
+
+$\frac{\diff u}{\diff y} = -4yx^2 + \frac{\diff C}{\diff y} = -4x^2 y + 4y^3$
+
+$\frac{\diff C}{\diff y} = 4y^3$
+
+$C(y) = 4y^3 \diff y = \frac{4y^4}{4} = y^4 + K$
+
+\textbf{Ответ:} $u = x^3 - 2y^2 x^2 + y^4 + K$
+
+\subsubsection{№3847}
+
+$\diff u = \frac{(x + 2y) \diff x + y \diff y}{(x + y)^2} = \frac{x + 2y}{(x+y)^2} \diff x + \frac{y}{(x + y)^2} \diff y$
+
+Ненужный шаг, мы зря начали это считать: $\frac{\diff P}{\diff y} = \frac{2(x + y)^2 - 2(x + 2y)(x + y)}{(x + y)^4} = \frac{2(x + y - x - 2y)}{(x+y)^3} = -\frac{2y}{(x + y)^3}$, проверим другую частную производную: $\frac{\diff Q}{\diff x} = \frac{-2y(x + y)}{(x+y)^3} = \frac{-2y}{(x+y)^3}$. Они совпадают, значит мы можем решать.
+
+$u = \int \frac{x + y + y}{(x+y)^2} \diff x = \int \frac{x + y}{(x + y)^2} + \int \frac{y}{(x + y)^2} \diff x = \int \frac{\diff (x + y)}{x + y} + y \int \frac{d(x + y)}{(x + y)^2} = \ln |x + y| - \frac{y}{x + y} + C(y)$
+
+$\frac{\diff u}{\diff y} = \frac{1}{x + y} - \frac{(x + y) - y}{(x + y)^2} + \frac{\diff C}{\diff y} = \frac{1}{x + y} - \frac{x}{(x + y)^2} + \frac{\diff C}{\diff y} = \frac{y}{(x + y)^2}$
+
+$\frac{\diff C}{\diff y} = \frac{x + y}{(x + y)^2} - \frac{1}{x + y} = \frac{1}{x + y} - \frac{1}{x + y} = 0$
+
+$C(y) = C$
+
+\textbf{Ответ}: $u = \ln |x + y| - \frac{y}{x + y} + C$
+
+\subsection{Вычисление криволинейных интегралов от полных дифференциалов}
+
+\paragraph{Пример №1} $\int\limits_{(0; 0)}^{(2; 1)} 2 xy \diff x + x^2 \diff y$
+
+Возможны несколько вариантов:
+
+\begin{enumerate}
+    \item Восстановить полный дифференциал, после чего вычислить:
+    
+    $\int\limits_{A}^{B} \diff u = u(B) - u(A)$
+    \item Так как путь интегрирования не имеет значения, можем сами его выбирать. Например:
+    
+    $AO: \begin{cases}
+        y = 0 \\
+        \diff y = 0
+    \end{cases}, AB: \begin{cases}
+        x = 2 \\
+        \diff x = 0
+    \end{cases}$
+
+    $\int\limits_{(0; 0)}^{(2; 1)} 2 xy \diff x + x^2 \diff y = \int\limits_{0}^{2} 2x * 0 \diff x + \int\limits_{0}^{1} 4 \diff y = 0 + 4y \bigg|_{0}^{1} = 0 + 4 = 4$
+\end{enumerate}
+
+\subsubsection{№3840}
+
+$\int\limits_{(3;4)}^{(5;12)} \frac{x \diff x}{x^2 + y^2} + \frac{y \diff y}{x^2 + y^2}$
+
+Проверим:
+
+$\frac{\diff P}{\diff y} = \frac{0 - 2xy}{(x^2 + y^2)^2}$
+
+$\frac{\diff Q}{\diff x} = \frac{0 - 2xy}{(x^2 + y^2)^2}$
+
+Пойдем по второму пути:
+
+$AD: \begin{cases}
+    x = 3 \\
+    \diff x = 0
+\end{cases}$
+
+$DB: \begin{cases}
+    y = 12 \\
+    \diff y = 0
+\end{cases}$
+
+$\int\limits_{4}^{12} (\frac{y}{9 + y^2}) \diff y = (\frac{1}{2} \ln |y^2 + 9|) \bigg|_{4}^{12} = (\frac{1}{2} \ln |144 + 9|) - (\frac{1}{2} \ln |16 + 9|)$
+
+$\int\limits_{3}^{5} (\frac{x}{x^2 + 144}) \diff x = (\frac{1}{2} \ln |x^2 + 144|) \bigg|_{3}^{5} = (\frac{1}{2} \ln |25 + 144|) - (\frac{1}{2} \ln |9 + 144|)$
+
+$\int\limits_{(3;4)}^{(5;12)} \frac{x \diff x}{x^2 + y^2} + \frac{y \diff y}{x^2 + y^2} = \frac{1}{2} (\ln|169| - \ln |25|)$
+
+\section{Практическое занятие — 17.10.2023}
+
+\subsection{Дифференциальные уравнения}
+
+\begin{definition}
+    \textbf{Дифференциальным уравнением} называется уравнение, связывающее независимую переменную $x$, искомую функцию $y$ и ее какие-то производные:
+    $$
+    F(x, y, y', y'', \dots) = 0
+    $$
+    \textbf{Обыкновенное дифференциальное уравнение}:
+    $$
+    y' = f(x)
+    $$
+    \textbf{Дифферециальное уравнение в частных производных}:
+    $$
+    y' = f(x, t)
+    $$
+\end{definition}
+
+\begin{definition}
+    \textbf{Порядком} в дифференциальном уравнении называется порядок наивысшей производной, входящей в это уравнение.
+\end{definition}
+
+\begin{definition}
+    \textbf{Решением} (интегралом) дифференциального уравнения называется всякая функция, которая будучи подставлена в уравнение обращает его в верное равенство.
+\end{definition}
+
+\paragraph{Пример №1}
+
+Пусть
+
+$$y'' - y = 0$$
+
+Проверим:
+
+\begin{enumerate}
+    \item $y = x$
+
+    $y' = 1$, $y'' = 0$
+
+    Таким образом, не является решением.
+    \item $y = \sin x$
+
+    $y' = \cos x$, $y'' = -\sin x$
+
+    Таким образом, не является решением
+    \item $y = e^{x}$
+
+    $y' = e^{x}$, $y'' = e^{x}$
+
+    Является решением.
+\end{enumerate}
+
+\begin{definition}
+    \textbf{Общим решением} дифференциального уравнения называется функция $y = \phi(x; C)$ ($C = const$), которая
+    
+    \begin{enumerate}
+        \item удовлетворяет дифференциальному уравнению при любом значении $C$;
+        \item каково бы не было начальное условие, всегда можно подобрать значение $C_0$, чтобы оно удовлетворяло указанному начальному условию.
+    \end{enumerate}
+\end{definition}
+
+\paragraph{Пример №1}
+
+$y = x^2 + C$
+
+$y(0) = 4$
+
+$y = x^2 + 4$ — Решение задачи Коши, удовлетворяет нач. усл.
+
+\paragraph{Пример №2}
+
+Найти уравнение кривой, у которой точка пересечения любой касательной с осью $OX$ $K$ равноудалена от нач. координат $O$ и от точки касания $M(x, y)$.
+
+Условие, которое должно быть выполнено: $|OK| = |OM|$
+
+Уравнение касательной:
+
+$Y - y = y' (X - x)$
+
+В т.к $Y = 0$, получаем:
+
+$-y = y'(X - x) \Leftrightarrow x - \frac{y}{y'} = X$. Таким образом, можем теперь задать коордианты т. K: $(x - \frac{y}{y'}; 0)$
+
+$|OK| = |x - \frac{y}{y'}|$
+
+$|KM| = \sqrt{(x - (x - \frac{y}{y'}))^2 + (y - 0)^2}$
+
+$|x - \frac{y}{y'}| = \sqrt{(\frac{y}{y'})^2 + y^2}$
+
+$x^2 - \frac{2xy}{y'} + (\frac{y}{y'})^2 = (\frac{y}{y'})^2 + y^2$
+
+$-\frac{2xy}{y'} = -y^2 + x^2$
+
+$y' = \frac{2xy}{x^2-y^2}$ — Дифференциальное уравнение (I порядок)
+
+\paragraph{Геометрическая интерпретация решения дифференциального уравнения}
+
+Общее решение (общий интеграл) представляет собой семейство кривых на координатной плоскости, а решение задачи Коши представляет собой кривую, проходящую через заданную точку.
+
+\subsubsection{Теорема о существовании и единственности решения}
+
+\begin{theorem}[О существовании и единственности решения]
+    Пусть в дифференциальном уравнении $y' = F(x, y)$ функция $F(x, y)$ и ее частная производная $\frac{\delta f}{\delta y}$ непрерывны на открытом множестве $G$. В этом случае
+    \begin{enumerate}
+        \item Для всякой точки $(x_0, y_0) \in G$ найдется решение $y = y(x)$ дифференциального уравнения $y' = f(x, y)$, удовлетворяющее условию $y_0 = y(x_0)$ (решение задачи Коши).
+        \item Если два решения ($y = y_1(x)$, $y = y_2(x)$) дифференциального уравнения $y' = F(x, y)$ совпадают хотя бы для одного решения $x^{*}$. то эти решения совпадают для всех тех значений переменной $x$, для которой они определены.
+    \end{enumerate}
+\end{theorem}
+
+\subsubsection{Дифференциальный уравнения (I порядок) с разделенными или разделяющимися переменными}
+
+Дифференциальное уравнение (I порядок) может быть записано:
+
+\begin{enumerate}
+    \item $y' = f(x; y)$
+    \item $p(x; y) \diff x + q(x, y) \diff y = 0$
+\end{enumerate}
+
+\begin{definition}
+    \textbf{Уравнением с разделяющимися переменными} называют дифференциальное уравнение, в котором функция $f$ может быть разбита на две такие функции, разделенные знаками умножения или деления, что одна из них зависит только от $x$, а другая зависит только от $x$.
+
+    $$y' = f_1(x) * f_2(y) \ \ \textbf{(1)}$$
+    $$p_1(x) * p_2(y) + q_1(x) * q_2(y) \diff y = 0 \ \ \textbf{(2)}$$
+\end{definition}
+
+Разделение переменных:
+
+\begin{enumerate}
+    \item $\frac{\diff y}{\diff x} = f_1(x) * f_2(y)$
+
+    $\frac{\diff y}{f_2(y)} = f_1(x) \diff x$
+    \item $p_1(x) p_2(y) \diff x = -q_1(x) q_2(y) \diff y$
+
+    $\frac{p_1(x) \diff x}{q_1(x)} = -\frac{q_2(y) \diff y}{p_2(y)}$
+\end{enumerate}
+
+После этого мы можем интегрировать левую и правую часть:
+
+\begin{enumerate}
+    \item $\int \frac{\diff y}{f_2(y)} = \int f_1(x) \diff x$
+    \item $\int \frac{p_1(x) \diff x}{q_1(x)} = -\int \frac{q_2(y) \diff y}{p_2(y)}$
+\end{enumerate}
+
+Получим:
+
+\begin{enumerate}
+    \item $\Phi_2(y) = \Phi_1(x) + C$
+
+    или
+
+    $\Phi_2(y) - \Phi_1(x) = C$
+    \item $F_1(x) = F_2(y) + C$
+\end{enumerate}
+
+\paragraph{Пример №1}
+
+$\sqrt{y^2 + 1} \diff x = xy \diff y$
+
+Выполним разделение переменных:
+
+$\frac{\diff x}{x} = \frac{y \diff y}{\sqrt{y^2 + 1}}$
+
+Интегрируем полученное:
+
+$\int \frac{\diff x}{x} = \int \frac{y \diff y}{\sqrt{y^2 + 1}}$
+
+$\ln |x| = (y^2 + 1)^{-\frac{1}{2}} (y^2 + 1)$
+
+$\ln |x| = \frac{1}{2} \frac{(y^2 + 1)^{1/2}}{1/2} + C$
+
+$\ln |x| = (y^2 + 1)^{1/2} + C$
+
+\textbf{Ответ}: $\ln Cx = \sqrt{y^2 + 1}$
+
+\paragraph{Замечание о приведении к уравнениям с разделющимися переменными}
+
+Уравнение вида $y' = f(ax + by + c)$ можно привести заменой $z = ax + by$ или $ax + by + C$ к уравнению с разделяющимися переменными.
+
+\paragraph{Пример №2}
+
+$(x + 2y) y' = 1$
+
+$y' = \frac{1}{x + 2y}$
+
+Заменим: $z = x + 2y$
+
+$\frac{z - x}{2} = y$
+
+$\frac{z' - 1}{2} = y'$
+
+$\frac{z' - 1}{2} = \frac{1}{z}$
+
+$\frac{\diff z}{\diff x} = z' = \frac{2}{z} + 1 = \frac{2 + z}{z}$
+
+$\frac{z}{z + 2} \diff z = \diff x$
+
+Переменные теперь разделены и их можно проинтегрировать:
+
+$\int \frac{z + 2 - 2}{z + 2} \diff z = \int \diff x$
+
+$\int (1 - \frac{2}{z + 2}) \diff z = \int \diff x$
+
+$\int \frac{\diff z}{z + 2} = \ln |z + 2|$, $\int \diff z = 2$
+
+$z - 2 \ln |z + 2| = x + C$
+
+$x + 2y - 2 \ln |x + 2y + 2| = x + C$
+
+\textbf{Ответ:} $2y - 2 \ln |x + 2y + 2| = C$
+
+\subsubsection{Однородные дифференциальные уравнения (I порядок)}
+
+\begin{definition}
+    \textbf{Функция $f(x y)$ называется однородной функцией} $n$-го измерения относительно переменных $x$ и $y$, если для любой $\lambda$ справедливо следующее:
+    $$
+    f(\lambda x, \lambda y) = \lambda^{n} f(x; y)
+    $$
+\end{definition}
+
+Пример однородной функции второго измерения:
+
+$$f(x, y) = \sqrt[3]{x^6 + y^6}$$
+
+$$f(\lambda x, \lambda y) = \sqrt[3]{\lambda^6 x^6 + \lambda^6 y^6} = \sqrt[3]{\lambda^6 (x^6 + y^6)} = \lambda^2 \sqrt{x^6 + y^6}$$
+
+Пример функции, не являющейся однородной:
+
+$$f(x, y) = \sqrt[3]{x^6 + y^3}$$
+
+$$f(\lambda x, \lambda y) = \sqrt[3]{\lambda^6 x^6 + \lambda^3 y^3} = \lambda^3 \sqrt{\lambda^3 x^3 + y^6}$$
+
+\begin{definition}
+    \textbf{Дифференциальное уравнение (I порядок) называется однородным} относительно $x$ и $y$, если $f(x, y)$ является однородной функцией нулевого измерения:
+
+    $$f(\lambda x, \lambda y) = \lambda^{0} f(x, y)$$
+\end{definition}
+
+Пример однородного дифференциального уравнения:
+
+$$f(x, y) = \frac{x^2 - y^2}{2xy}$$
+
+$$f(\lambda x, \lambda y) = \frac{\lambda^2 x^2 - \lambda^2 y^2}{2 \lambda x \lambda y} = \frac{x^2 - y^2}{2xy}$$
+
+\paragraph{Решение однородных дифференциальных уравнений (I порядок)} 
+
+Необходимо заменить:
+
+$$t = \frac{y}{x}$$
+
+$$y = tx$$
+
+$$y' = t' x + t$$
+
+Получим:
+
+$$t' * x + t = f(t)$$
+
+$$t' * x = f(t) - t$$
+
+$$\frac{\diff t}{\diff x} * x = f(t) - t$$
+
+$$\int \frac{\diff t}{f(t) - t} = \int \frac{\diff x}{x}$$
+
+Переменные разделились и мы интегрируем, не забывая обратно заменить $t$.
+
+\paragraph{Пример №1}
+
+$y' = \frac{x + 2y}{x}$
+
+$y' = 1 + 2 * \frac{y}{x}$
+
+Заменим:
+
+$t = \frac{y}{x}$, $y = tx$, $y' = t' x + t$
+
+Получим:
+
+$t'x + t = 1 + 2t$
+
+$t' * x = 1 + t$
+
+$\frac{\diff t}{\diff x} * x = 1 + t$
+
+Выполним окончательное разделение:
+
+$\frac{\diff t}{t + 1} = \frac{\diff x}{x}$
+
+Теперь мы можем интегрировать:
+
+$\int \frac{\diff t}{t + 1} = \int \frac{\diff x}{x}$
+
+$\ln |t + 1| = \ln |x| + \ln C$
+
+$\ln |t + 1| = \ln Cx$
+
+$t + 1 = Cx$
+
+$\frac{y}{x} = Cx - 1$
+
+\textbf{Ответ:} $y = Cx^2 - x$
+
 \end{document}
