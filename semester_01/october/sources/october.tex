@@ -670,4 +670,184 @@ $\frac{y}{x} = Cx - 1$
 
 \textbf{Ответ:} $y = Cx^2 - x$
 
+\pagebreak
+\section{Лекция — 31.10.2023}
+
+\subsection{Дифференциальные уравнения}
+
+\subsubsection{Уравнения, приводимые к однородным}
+
+$y' = f(\frac{a_1 x + b_1 y + c_1}{a_2 x + b_2 y + c_2})$
+
+Возможны варианты в зависимости от значения $\begin{vmatrix} a_1 & b_1 \\ a_2 & b_2 \end{vmatrix}$
+
+\begin{enumerate}
+    \item Если этот определитель равен нулю, то это случай, когда $\frac{a_1}{a_2} = \frac{b_1}{b_2}$. В этом случае необходимо делать замену, как будет удобно в каждом конкретном случае.
+    
+    Допустим, $z = a_1 x + b_1 y + c_1$, выражаем: $y = \frac{1}{b_1} (z - a_1 x - c_1)$, $y' = \frac{z'}{b_1} - \frac{a_1}{b_1}$. 
+    
+    Если мы все это подставим, то получим \textbf{уравнение в разделяющихся переменных}, которое мы можем решить.
+
+    \paragraph{Пример №1} $y' = \frac{x + 2y - 1}{2x + 4y + 5}$
+
+    Выразим: $z = x + 2y - 1 \implies y = \frac{1}{2} z - \frac{1}{2} x + \frac{1}{2}$, $y' = \frac{1}{2} z' - \frac{1}{2}$. 
+    
+    И далее подставим: $\frac{1}{2} z' - \frac{1}{2} = \frac{z}{2z + 7} \Longleftrightarrow \frac{1}{2} z' = \frac{z}{2z + 7} + \frac{1}{2} \Longleftrightarrow \frac{1}{2} \frac{\diff z}{\diff x} = \frac{2z + 2z + 7}{2 (2z + 7)}$.
+
+    Теперь можем интегрировать: $\int \frac{2 z + 7}{4 z + 7} \diff z = \int \diff x$. Но дробь неправильная, поэтому выделим целую часть, получим: $\frac{1}{2} \int \frac{(4z + 7) + 7}{4z + 7} \Longleftrightarrow \frac{1}{2} (\int \diff z + \int \frac{7}{4z + 7} \diff z) \Longleftrightarrow \frac{1}{2} (z + \frac{7}{4} \ln |4z + 7|) = x + C$
+
+    Мы получили неявный вид решения дифференциального уравнения. Единственное, что важно — подставить $x + 2y$ вместо $z$ обратно, и всё будет хорошо: $x + 2y - 1 + \frac{7}{4} \ln |4 (x + 2y - 1) + 7| = 2x + K$
+    \item Если определитель не равен нулю, то есть коэффициенты не пропорциональны: $\frac{a_1}{a_2} \ne \frac{b_1}{b_2}$, то $x = u + \alpha$, $y = v + \beta$, где $\alpha$ и $\beta$ — решения системы
+    
+    $$\begin{cases}
+        a_1 \alpha + b_1 \beta + c_1 = 0 \\
+        a_2 \alpha + b_2 \beta + c_2 = 0
+    \end{cases}$$
+
+    После того, как мы всё подставим, у нас должно будет получиться что-то вроде $\frac{k_1 u + k_2 v}{k_3 u + k_4 v}$. То есть, свободных членов не должно остаться. Делим обе части на $u$, получаем: $\frac{k_1 + k_2 \frac{v}{u}}{k_3 + k_4 \frac{v}{u}}$ — однородное уравнение. Пользуясь заменой $\frac{v}{u} = t$, оставшееся бодренько решаем: $v = ut$, $v_u' = 1 * t + ut'_u$
+
+    \paragraph{Пример №2} $(2x - 4y + 6) \diff x + (x + y - 3) \diff y = 0$
+
+    Приведем необходимому виду: $\frac{\diff y}{\diff x} = \frac{2x - 4y + 6}{x + y - 3}$. После чего составим и решим систему:
+
+    $$
+    \begin{cases}
+        2 \alpha - 4 \beta + 6 = 0 \\
+        \alpha + \beta - 3 = 0
+    \end{cases} \Longleftrightarrow \begin{cases}
+        6 \alpha - 6 = 0 \\
+        1 + \beta - 3 = 0
+    \end{cases} \Longleftrightarrow \begin{cases}
+        \alpha = 1 \\
+        \beta = 2
+    \end{cases}
+    $$
+
+    Выполним замену $x = u + 1$, $y = v + 2$, $\diff x = \diff u$, $\diff y = \diff v$:
+
+    $\frac{\diff v}{\diff u} = \frac{2 (u + 1) - 4 (v + 2) + 6}{u + 1 + v + 2 - 3} \Longleftrightarrow \frac{\diff v}{\diff u} = \frac{2 u - 4v}{u + v}$. У нас, как и ожидалось, пропали константы. Мы сделали всё правильно. Если бы они не пропали — значит, мы что-то сделали не так. У нас теперь есть однородное уравнение, которое мы легко можем решать: $\frac{\diff v}{\diff u} = \frac{2 u - 4v}{u + v}$. Поделим на $u$ всю правую часть, получим: $\frac{\diff v}{\diff u} = \frac{2 - 4 \frac{v}{u}}{1 + \frac{v}{u}}$, $\frac{v}{u} = t$, $v = ut$, $\frac{\diff v}{\diff u} = t + u \frac{\diff t}{\diff u}$. 
+    
+    Осталось сделать уравнение с разделяющимися переменными для этих $t$ и $u$: $t + u \frac{\diff t}{\diff u} = \frac{2 - 4t}{1 + t} = \frac{2 - 4t - t - t^2}{t + 1} = - \frac{t^2 + 5t - 2}{t + 1}$. Разделяем переменные: $\frac{t + 1}{t^2 + 5t - 2} \diff t = \frac{\diff u}{u}$. Необходимо интегрировать:  $\int \frac{t + 1}{t^2 + 5t - 2} \diff t = \int \frac{\diff u}{u} \Longleftrightarrow \frac{1}{2} \int \frac{2 t + 5}{t^2 + 5t 2 2} \diff t - \frac{3}{2} \int \frac{\diff t}{t^2 + 5t - 2} = \ln + \ln c$. Далее: $\frac{1}{2} \ln |t^2 + 5t - 2| + \frac{1}{2} * \frac{2}{\sqrt{33}} \ln |\frac{t + \frac{5}{2} - \frac{\sqrt{33}}{2}}{t + \frac{5}{2} + \frac{\sqrt{33}}{2}}| = c_n c_u$. Получили ужас. Не будем ничего делать, лишь вернемся к переменной $u$ и потом к $x$, $y$.
+\end{enumerate}
+
+\subsubsection{Линейные уравнения и уравнения Бернулли. Метод вариации произвольной постоянной}
+
+\begin{definition}{\textbf{Линейное уравнение}}
+    имеет вид:
+
+    $$y' + p(x)y = q(x)$$
+\end{definition}
+
+\begin{definition}{\textbf{Уравнение Бернулли}}
+    имеет вид:
+
+    $$y' + p(x)y = q(x) y^{\alpha}$$
+\end{definition}
+
+Для обеих видов уравнений:
+
+$y = y_{oo} + \tilde{y}$, $y' + p(x) y = 0$, $\frac{\diff y}{\diff x} = -p(x) y$, $\int \frac{\diff y}{y} = - \int p(x) \diff x$. Получилось уравнение с разделяющимися переменными, $y_{oo} = \Phi(x) + C$.
+
+\textbf{Метод вариации произвольной переменной} заключается в том, что решение уравнения будем искать в виде похожем на $y_{oo}$, только константу $C$ мы будем рассматривать как функцию, зависящую от $x$: $y = \Phi(x) + C(x)$, $y' = \Phi'(x) + C'(x)$. Эти значения мы подставляем в то уравнение, с которым работаем. Если у нас в итоге что-то сокращается — это хорошо; значит, что мы на верном пути. У нас получится уравнение относительно $C(x)$ и $x$
+
+\paragraph{Пример №1}
+
+$y' - \frac{y}{x} = x^2 + 2x$
+
+\begin{enumerate}
+    \item $y' - \frac{y}{x} = 0$, $\frac{\diff y}{\diff x} = \frac{y}{x}$, $\int \frac{\diff y}{y} = \int \frac{\diff x}{x}$, $\ln |y| = \ln |x| + \ln C$, $\ln y = \ln C_x$, $y_{oo} = Cx$ — общее решение уравнения с нулём в правой части.
+    \item $$
+    \begin{cases}
+        y = C(x) \\
+        y' = C'(x) x + C(x)
+    \end{cases}$$
+
+    Подставляем в исходное уравнение: $C'(x) + C(x) - \frac{C(x) x}{x} = x^2 + 2x \Longleftrightarrow \frac{\diff C(x)}{\diff x} = x + 2 \Longleftrightarrow \int \diff C(x) = \int (x + 2) \diff x$, $C(x) = \frac{x^2}{2} + 2x + K$. Теперь подставим обратно, получим: $y = (\frac{x^2}{2} + 2x + K) * x = \frac{x^3}{2} + 2x^2 + Kx$, где $y_{oo} = Kx$, $\tilde{y} = \frac{x^2}{2} + 2x^2$
+\end{enumerate}
+
+\paragraph{Пример №2}
+
+$x y' - 2y = 2x^4$. Но нам это не нравится, уединим $y'$, чтобы всё было симпатичней: $y' - \frac{2y}{x} = 2x^3$
+
+\begin{enumerate}
+    \item Решим уравнение $y' - \frac{2y}{x} = 0$ и запишем его ответ: $\frac{\diff y}{y} = \int \frac{2 \diff x}{x}$, $\ln |y| - 2 \ln x + \ln C$, $\ln y = \ln C x^2$, $y_{oo} = Cx^2$
+    \item $$\begin{cases}
+        y = C(x) * x^2 \\
+        y' = C'(x) x^2 + 2x * C(x)
+    \end{cases}$$
+
+    $C'(x) x^2 + 2x C(x) - \frac{2 C(x) x^2}{x} = 2x^3$
+
+    $\frac{\diff C}{\diff x} = 2x$, $\int \diff C = 2 \int x \diff x \Longleftrightarrow C(x) = \frac{2x^2}{2} + K$
+
+    Получаем: $y = (x^2 + K) x^2 = x^4 + Kx^2$, где $\tilde{y} = x^4$, $y_{oo} = Kx^2$
+\end{enumerate}
+
+\subsubsection{Метод Бернулли}
+
+$y = u * v$, $y' = u' v + u v'$
+
+Имеем уравнение: $y' + p(x) y = q(x) y^{\alpha}$. Подставим, получим: $u' v + u v' + p(x) u v = q(x) u^\alpha v^\alpha$. Далее выберем такие функции $u$ и $v$, чтобы $uv' + p(x) u v$ занулилось.
+
+\begin{enumerate}
+    \item $uv' = -p(x) u v$
+
+    $\frac{\diff v}{\diff x} = - p(x) v$
+
+    $\int\frac{\diff v}{v} = - \int p(x) \diff x$
+
+    Результат должен быть записан: $v = \Phi(x)$ без константы.
+    \item После наших преобразований имеем: $u' v = q(x) u^\alpha v^\alpha \Longrightarrow u' = q(x) u^\alpha v^{\alpha - 1}$
+    
+    $\frac{\diff u}{\diff x} = q(x) u^\alpha \Phi^{\alpha - 1}(x)$
+
+    $\int \frac{\diff u}{u^{\alpha}} = \int q(x) \Phi^{\alpha - 1}(x) \diff x$
+
+    У нас получится решение: $u = F(x) + K$. Таким образом, итоговый ответ: $y = (F(x + K)) \Phi(x)$
+\end{enumerate}
+
+\paragraph{Пример №1} $y' - \frac{y}{x} = x^2 + 2x$
+
+$y = u v$, $y' = u' v + u v'$
+
+$u'v + uv' - \frac{uv}{x} = x^2 + 2x$
+
+\begin{enumerate}
+    \item Обнуляем $uv' - \frac{uv}{x}$: $\frac{\diff v}{\diff x} = \frac{v}{x} \Longleftrightarrow \int \frac{\diff v}{v} = \int \frac{\diff x}{x} \Longleftrightarrow v = x$
+    \item Переписываем наше уравнение: $u' v = x^2 + 2x$
+
+    Подставляем: $\frac{\diff u}{\diff x} * x = x^2 + 2x$
+
+    $\diff u = (x + 2) \diff x$
+
+    $u = \frac{x^2}{2} + 2x + K$
+
+    $y = u v = (\frac{x^2}{2} + 2x + K) x = \frac{x^3}{2} + 2x^2 + K x$
+\end{enumerate}
+
+\paragraph{Пример №2} Если имеем уравненине в правой части вроде $y' + 2y = y^2 e^{x}$, то мы делаем всё то же самое: $y = uv$, $y' = uv' + uv'$
+
+$u' v + uv' + 2 u v = u^2 v^2 e^x$
+
+\begin{enumerate}
+    \item $\frac{\diff v}{v} = -2 \diff x$
+
+    $\ln v = - 2 x$
+
+    $v = e^{- 2x}$
+    \item $u' v = u^2 v^2 e^{x} \Longleftrightarrow u' = u^2 v e^{x}$
+
+    $\frac{\diff u}{\diff x} = u^2 e^{-2x} * e^{x}$
+
+    $\int \frac{\diff u}{u^2} = \int e^{-x} \diff x$
+
+    $\frac{1}{u} = e^{-x} + C \Longleftrightarrow \frac{1}{u} = C + \frac{1}{e^{x}} = \frac{C e^{x} + 1}{e^{x}} \Longleftrightarrow u = \frac{e^{x}}{C e^{x} + 1}$
+
+    $y = u v = \frac{e^{x}}{C e^{x} + 1} e^{-2x} = \frac{1}{e^{x} (C e^{x} + 1)}$
+\end{enumerate}
+
+\paragraph{Важное замечание}
+
+Иногда может оказаться, что уравнение не является линейным, если мы считаем $y$ за функцию, а $x$ за переменную, но можно принять $x$ за функцию и $y$ за переменную и сделать его линейным.
+
 \end{document}
