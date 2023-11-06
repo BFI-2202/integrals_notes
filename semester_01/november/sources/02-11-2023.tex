@@ -1,0 +1,444 @@
+\documentclass{article}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+
+\usepackage{tabularx}
+\usepackage{amsmath}
+\usepackage{pgfplots}
+\usepackage{geometry}
+\usepackage{multicol}
+\geometry{
+    left=1cm,right=1cm,top=2cm,bottom=2cm
+}
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+
+\newtheorem{definition}{Определение}
+\newtheorem{theorem}{Теорема}
+
+\DeclareMathOperator{\sign}{sign}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks, citecolor=black, filecolor=black, linkcolor=black, urlcolor=black
+}
+
+\title{Интегралы и дифференциальные уравнения}
+\author{Лисид Лаконский}
+\date{November 2023}
+
+\begin{document}
+\raggedright
+
+\maketitle
+
+\tableofcontents
+\pagebreak
+
+\section{Практическое занятие — 02.11.2023}
+
+\subsection{Дифференциальные уравнения}
+
+\subsubsection{С разделяющимися переменными}
+
+\begin{enumerate}
+    \item $y' = f(x, y)$
+
+    $\frac{\diff y}{\diff x} = f_1(x) * f_2(y)$
+    
+    $\frac{\diff y}{f_2(y)} = f_1(x) \diff x$
+
+    $\int \frac{\diff y}{f_2(y)} = \int f_1(x) \diff x$
+
+    $\Phi_2(y) = \Phi_1(x) + C$
+    \item $p(x, y) \diff x + q (x, y) \diff y = 0$
+
+    $p_1(x) p_2(y) \diff x + q_1 (x) q_2 (y) \diff y = 0$
+
+    $\int \frac{p_1(x)}{q_1(x)} \diff x = - \int \frac{q_2(y)}{p_2(y)} \diff y$
+
+    $F_1(x) = F_2(y) + C$
+\end{enumerate}
+
+\begin{minipage}{0.49\textwidth}
+    \paragraph{Пример №1} $y' = \frac{x}{y}$
+
+    $\frac{\diff y}{\diff x} = \frac{x}{y}$
+    
+    $y \diff y = x \diff x$
+    
+    $\int y \diff y = \int x \diff x$
+    
+    $\frac{y^2}{2} = \frac{x^2}{2} + \frac{C}{2}$
+    
+    $y^2 = x^2 + C$
+    
+    \paragraph{Пример №2} $\frac{\diff y}{\diff x} = \frac{y}{x}$
+    
+    $\int \frac{\diff y}{y} = \int \frac{\diff x}{x}$
+    
+    $\ln |y| = \ln |x| + C$
+    
+    $y = C x$
+    
+    \paragraph{Пример №3} $(1 + y^2) x \diff x + (1 + x^2) \diff y = 0$
+    
+    $\int \frac{x \diff x}{1 + x^2} = - \int \frac{\diff y}{1 + y^2}$
+    
+    $\frac{1}{2} \ln |x^2 + 1| = C - \arctg y$
+    
+    \paragraph{Пример №4} $y' = (4x + y + 1)^2$, $y' = f(ax + by + c)$
+    
+    $z = 4x + y + 1$
+    
+    $y = z - 4x - 1$, $y' = z' - 4$
+    
+    $z' - 4 = z^2$, $\frac{\diff z}{\diff x} = z^2 + 4$, $\int \frac{\diff z}{z^2 + 2^2} = \int \diff x$
+    
+    $\frac{1}{2} \arctg \frac{z}{2} = x + C$
+    
+    $\frac{1}{2} \arctg \frac{4x + y + 1}{2} = x + C$
+
+    \paragraph{Пример №3910}
+    $y' + \sin \frac{x + y}{2} = \sin \frac{x - y}{2}$
+
+    $y' = \sin \frac{x - y}{2} - \sin \frac{x + y}{2}$
+
+    $y' = 2 \sin \frac{x - y - (x + y)}{2 * 2} \cos \frac{x - y + x + y}{2 * 2}$
+
+    $y' = 2 \sin (\frac{-y}{4}) \cos (\frac{x}{2})$
+
+    $y' = -2 \sin \frac{y}{4} \cos \frac{x}{2}$
+
+    $\frac{\diff y}{\diff x} = - 2 \sin \frac{y}{4} \cos \frac{x}{2}$
+
+    $\diff y = -2 \sin \frac{y}{4} \cos \frac{x}{2} \diff x$
+
+    $\frac{\diff y}{2 \sin \frac{y}{2}} = -\cos \frac{x}{2} \diff x$
+
+    $\frac{\diff \frac{1}{2} y}{\sin \frac{y}{2}} = -\cos \frac{x}{2} \diff x$
+
+    $t = \frac{1}{2} y, t' = \frac{1}{2} \frac{y^2}{2} = \frac{y^2}{4} \diff t$
+
+    $\int \frac{\diff t}{\sin t} = - 2 \int \cos \frac{x}{2} \diff \frac{x}{2}$
+
+    $\ln \tg \frac{t}{2} = - 2 \sin \frac{x}{2} + C$
+
+    $\ln \tg \frac{y}{4} = - 2 \sin \frac{x}{2} + C$
+\end{minipage}
+\begin{minipage}{0.49\textwidth}
+    \paragraph{Пример №3901} $(xy^2 + x) \diff x + (y - x^2 y) \diff y = 0$
+
+    $(y - x^2 y) \diff y = (-xy^2 - x) \diff x$
+
+    $(1 - x)y \diff y = x (- y^2 - 1) \diff x$
+
+    $\int \frac{y \diff y}{y^2 + 1} = - \int \frac{x \diff x}{x^2 - 1}$
+
+    $\ln |y^2 + 1| = \ln |x^2 - 1| + C$
+    \paragraph{Пример №3902}
+    $xyy' = 1 - x^2$
+
+    $\frac{x y \diff y}{\diff x} = 1 - x^2$
+
+    $x y \diff y = (1 - x^2) \diff x$
+
+    $y \diff y = \frac{1 - x^2}{x} \diff x$
+
+    $\int y \diff y = \int \frac{1 - x^2}{x} \diff x$
+
+    $\frac{y^2}{2} = \int (\frac{1}{x} - x) \diff x$
+
+    $\frac{y^2}{2} = \ln |x| - \frac{x^2}{2} + C$
+
+    $y^2 = 2 \ln x - x^2 + C$
+    \paragraph{Пример №3903}
+    $yy' = \frac{1 - 2x}{y}$
+
+    $\frac{y \diff y}{\diff x} = \frac{1 - 2x}{y}$
+
+    $y \diff y = \frac{1 - 2x}{y} \diff x$
+
+    $y^2 \diff y = (1 - 2x) \diff x$
+
+    $\int y^2 \diff y = \int (1 - 2x) \diff x$
+
+    $\frac{y^3}{3} = x - \frac{2x^2}{2} + C$
+    \paragraph{Пример №3907}
+    $\sqrt{1 - y^2} \diff x + y \sqrt{1 - x^2} \diff y = 0$
+
+    $\sqrt{1 - y^2} \diff x = -y\sqrt{1 - x^2} \diff y$
+
+    $\frac{\sqrt{1 - y^2}}{\diff y} = -\frac{y\sqrt{1 - x^2}}{\diff x}$
+
+    $\frac{\sqrt{1 - y^2}}{y \diff y} = -\frac{\sqrt{1 - x^2}}{\diff x}$
+
+    $\frac{y \diff y}{\sqrt{1 - y^2}} = -\frac{\diff x}{\sqrt{1 - x^2}}$
+
+    Пусть $t = 1 - y^2$, $t' = - 2y \diff y$
+
+    $-\frac{1}{2} \int \frac{\diff t}{\sqrt{t}} = -\arcsin x + C$
+
+    $\frac{1}{2} \frac{\sqrt{t}}{1/2} = \arcsin x + C$
+
+    $\sqrt{1 - y^2} = \arcsin x + C$
+\end{minipage}
+
+\begin{minipage}{0.49\textwidth}
+    \paragraph{Пример №3913}
+    $y' \sin x = y \ln y$; $y \bigg|_{x = \frac{\pi}{2}} = e$
+
+    $\frac{\diff y}{\diff x} \sin x = y \ln y$
+
+    $\frac{\sin x}{\diff x} = \frac{y \ln y}{\diff y}$
+
+    $\frac{\diff x}{\sin x} = \frac{\diff y}{y \ln y}$
+    
+    $\int \frac{\diff x}{\sin x} = \int \frac{\diff y}{y \ln y}$
+
+    $\int \frac{\diff(\ln y)}{\ln y} = \int \frac{\diff x}{\sin x}$
+
+    $\ln |\ln |y|| = \ln | \tg \frac{x}{2}| + \ln C$
+    
+    $\ln |y| = c * \tg \frac{x}{2}$
+
+    $1 = c * 1 \implies c = 1$
+
+    $\ln y =  \tg \frac{x}{2}$
+
+    \paragraph{Пример №3915} $\sin y \cos x \diff y = \cos y \sin x \diff x$; $y \bigg|_{x = 0} = \frac{\pi}{4}$
+
+    $\frac{\sin y}{\cos y} \cos x \diff y = \sin x \diff x$
+
+    $\frac{\sin y}{\cos y} \diff y = \frac{\sin x}{\cos x} \diff x$
+
+    $\int \frac{\sin y}{\cos y} \diff y = \int \frac{\sin x}{\cos x} \diff x$
+
+    $- \int \frac{\diff (\cos y)}{\cos y} = - \int \frac{\diff (\cos x)}{\cos x}$
+
+    $\ln |\cos y| = \ln |\cos x| + \ln C$
+
+    $\cos y = c \cos x$
+
+    $\cos \frac{\pi}{4} = c \cos 0$
+
+    $\cos \frac{\pi}{4} = c$
+
+    $c = \frac{\sqrt{2}}{2}$
+
+    $\cos y = \frac{\sqrt{2} \cos x}{2}$
+\end{minipage}
+\begin{minipage}{0.49\textwidth}
+    \paragraph{Пример №3932} $y' = 3x - 2y + 5$
+
+    $z = 3x - 2y + 5$
+
+    $y = \frac{3x}{2} + \frac{5}{2} - \frac{z}{2}$
+
+    $y' = \frac{1}{2} (3 - z')$
+
+    $\frac{1}{2} (3 - z') = z$
+
+    $3 - z' = 2z$
+
+    $\frac{\diff z}{\diff x} = 3 - 2z$
+
+    $\frac{\diff z}{3 - 2z} = \diff x$
+
+    $\int \frac{\diff z}{3 - 2z} = \int \diff x$
+
+    $x = -\frac{1}{2} \ln |3 - 2z| + C$
+
+    $x = -\frac{1}{2} \ln |3 - 6x + 4y - 10| + C$
+\end{minipage}
+
+\subsubsection{С однородными переменными}
+
+$f(x, y)$, $f(\lambda x, \lambda y) = \lambda^{m} f(x, y)$
+
+$f(\lambda x, \lambda y) = f(x, y)$
+
+$y' = f(\frac{y}{x})$
+
+$t = \frac{y}{x}$
+
+$y = t * x$
+
+$y'_x = t' * x + t * 1$
+
+\begin{minipage}{0.49\textwidth}
+\paragraph{Пример №1} $y' = \frac{x}{y} + \frac{y}{x}$
+
+$t' * x + t = \frac{1}{t} + t$
+
+$\frac{\diff t}{\diff x} x = \frac{1}{t}$
+
+$\int t \diff t = \int \frac{\diff x}{x}$
+
+$\frac{t^2}{2} = \ln |x| + \ln |C|$
+
+$t^2 = \ln x^2 + \ln K$
+
+$\frac{y^2}{x62} = \ln K x^2$
+
+$y^2 = x^2 \ln K x^2$
+\paragraph{Пример №2} $\frac{\diff x}{\diff y} = \frac{x}{y} + \frac{x^2}{y^2}$
+
+$\frac{x}{y} = t$
+
+$x = yt$
+
+$x'_y = t + y \frac{\diff t}{\diff y}$
+\end{minipage}
+\begin{minipage}{0.49\textwidth}
+    \paragraph{Пример №3934}
+    $y' = \frac{y^2}{x^2} - 2$
+    
+    $t = \frac{y}{x}$, $t^2 = \frac{y^2}{x^2}$
+    
+    $y' = t^2 - 2$
+    
+    $t' * x + t = t^2 - 2$
+    
+    $\frac{\diff t}{\diff x} * x = t^2 - t - 2$
+    
+    $\frac{\diff t}{t^2 - t - 2} = \frac{\diff x}{x}$
+    
+    $\int \frac{\diff t}{t^2 - t - 2} = \int \frac{\diff x}{x}$
+    
+    $t^2 - t - 2 = 0$
+    
+    $t_1 = \frac{1 + 3}{2} = 2, t_2 = -1$
+    
+    $\int \frac{\diff t}{(t - 2)(t + 1)} = \int \frac{\diff x}{x}$
+
+    $\frac{1}{(t - 2)(t + 1)} = \frac{a}{t - 2} + \frac{b}{t + 1}$
+
+    $\frac{1}{(t - 2)(t + 1)} = \frac{a t + a + bt - 2b}{(t - 2)(t + 1)}$
+
+    $a = \frac{1}{3}, b = -\frac{1}{3}$
+
+    $\int \frac{\frac{1}{3} \diff t}{t - 2} - \int \frac{\frac{1}{3}}{t + 1} = \int \frac{\diff x}{x}$
+
+    $\ln \sqrt[3]{\frac{t - 2}{t + 1}} = \ln C x$
+\end{minipage}
+
+\begin{minipage}{0.49\textwidth}
+    \paragraph{Пример №3935}
+    $y' = \frac{x + y}{x - y}$
+
+    $y' = \frac{1 + \frac{y}{x}}{1 - \frac{y}{x}}$
+
+    $t' x + t = \frac{1 + t}{1 - t}$
+
+    $\frac{x \diff t}{\diff x} = \frac{1 + t}{1 - t} - t$
+
+    $\frac{x \diff t}{\diff x} = \frac{1 + t^2}{1 - t}$
+
+    $\frac{x}{\diff x} = \frac{1 + t^2}{(1 - t) \diff t}$
+
+    $\frac{\diff x}{x} = \frac{(1 - t) \diff t}{1 + t^2}$
+
+    $\int \frac{(1 - t) \diff t}{1 + t^2} = \int \frac{1 \diff t}{1 + t^2} - \int \frac{t \diff t}{1 + t^2} = \arctan t - \frac{\ln |1 + t^2|}{2} = \arctan \frac{y}{x} - \frac{\ln |1 + \frac{y^2}{x^2}|}{2}$
+
+    $\arctan \frac{y}{x} - \frac{\ln |1 + \frac{y^2}{x^2}|}{2} = \ln x + \ln C$
+\end{minipage}
+\begin{minipage}{0.49\textwidth}
+    \paragraph{Пример №3941}
+    $y' = e^{\frac{y}{x}} + \frac{y}{x}$
+
+    $t' x = e^{t}$
+
+    $\frac{x \diff t}{\diff x} = e^{t}$
+
+    $\int \frac{\diff x}{x} = \int \frac{\diff t}{e^{t}}$
+
+    $- \frac{1}{e^{\frac{y}{x}}} = \ln |x| + C$
+    \paragraph{Пример №3942}
+    $x y' = y \ln \frac{y}{x}$
+
+    $y' = \frac{y}{x} \ln \frac{y}{x}$
+
+    $t' x + t = t \ln t$
+
+    $t' x = t \ln t - t$
+
+    $\frac{x \diff t}{\diff x} = t \ln t - t$
+
+    $\frac{\diff x}{x} = \frac{\diff t}{t(\ln t - 1)}$
+
+    $\int \frac{d (\ln t - 1)}{\ln t - 1} = \int \frac{\diff x}{x}$
+
+    $\ln \ln (t - 1) = \ln C x$
+
+    $\ln t - 1 = Cx$
+
+    $\ln \frac{y}{x} = Cx + 1$
+\end{minipage}
+
+\subsubsection{Приводимые к однородным}
+
+$y' = f (\frac{a_1 x + b_1 y + c_1}{a_2 x + b_2 y + c_2})$
+
+\begin{enumerate}
+    \item Если $\frac{a_1}{a_2} = \frac{b_1}{b_2}$, то вводим $z$, например, $z = a_1 x + b_1 y + c_1$
+    \item Если $\frac{a_1}{a_2} \ne \frac{b_1}{b_2}$, то
+    
+    $x = u + \alpha$, $y = v + \beta$
+
+    $\begin{cases}
+        a_1 \alpha + b_1 \beta + c_1 = 0 \\
+        a_2 \alpha + b_2 \beta + c_2 = 0
+    \end{cases}$
+
+    Потом подставляем одно в одно место, другое в другое. В результате не должно остаться свободных членов.
+\end{enumerate}
+
+\begin{minipage}{0.49\textwidth}
+\paragraph{Пример №1} $y' = \frac{2 x + y - 1}{6x + 3y + 2}$
+
+$z = 2x + y - 1$
+
+$3z = 6x + 3y - 3$
+
+$6x + 3y + 2 = 3z + 5$
+
+$y = z - 2x + 1$, $y' = z' - 2$
+
+$z' - 2 = \frac{z}{3z + 5}$
+
+$\frac{\diff z}{\diff x} = \frac{z}{3z + 5} + 2$
+
+$\frac{\diff z}{\diff x} = \frac{7z + 10}{3z + 5}$
+
+$\int \frac{3z + 5}{7z + 10} \diff z = \int \diff x$
+
+$\frac{3}{7} \int \frac{z + \frac{5}{3}}{z + \frac{10}{7}} \diff z = \frac{3}{7} \int \frac{(z + \frac{10}{7}) + \frac{5}{21}}{(z + \frac{10}{7})} \diff z = \frac{3}{7} [\int \diff z + \frac{5}{21} \int \frac{\diff (z + \frac{10}{7})}{\frac{10}{7}}]$
+
+$\frac{3}{7} [z + \frac{5}{21} \ln |z + \frac{10}{7}|] = x + C$
+\end{minipage}
+\begin{minipage}{0.49\textwidth}
+    \paragraph{Пример №2} $(x + y - 1)^2 \diff y = 2 (y + 2)^2 \diff x$
+
+    $\frac{\diff y}{\diff x} = 2 (\frac{y + 2}{x + y - 1})^2$
+
+    $x = u + \alpha$, $y = v + \beta$
+
+    $\begin{cases}
+        \beta + 2 = 0 \\
+        \alpha + \beta - 1 = 0
+    \end{cases}$, $\beta = -2$, $\alpha = 3$
+
+    $x = u + 3$, $y = v - 2$, $\diff x = \diff u$, $\diff y = \diff v$
+
+    $\frac{\diff v}{\diff u} = 2 (\frac{v - 2 + 2}{u + 3 + v - 2 - 1})^2$, $\frac{\diff v}{\diff u} = 2 (\frac{v}{u + v})^2$
+
+    $\frac{\diff u}{\diff v} = \frac{1}{2} (\frac{u + v}{v})^2$, $\frac{\diff u}{\diff v} = \frac{1}{2} (\frac{u}{v} + 1)^2$
+
+    $t = \frac{u}{v}$, $u = v * t$, $\frac{\diff u}{\diff v} = t + v \frac{\diff t}{\diff v}$, $t + v \frac{\diff t}{\diff v} = \frac{1}{2} (t + 1)^2 = \frac{t^2}{2} + t + \frac{1}{2}$, $\frac{t^2 + 1}{2}$, $\int \frac{\diff t}{t^2 + 1} = \frac{1}{2} \int \frac{\diff v}{v}$
+
+    $\arctg t = \frac{1}{2} \ln |v| + \ln C = \ln c \sqrt{v} \Longleftrightarrow \arctg \frac{u}{v} = \ln C \sqrt{v} \Longleftrightarrow \arctg \frac{x - 3}{y + 2} = \ln C \sqrt{y + 2}$
+\end{minipage}
+
+\end{document}
