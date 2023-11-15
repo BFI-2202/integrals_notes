@@ -441,4 +441,325 @@ $\frac{3}{7} [z + \frac{5}{21} \ln |z + \frac{10}{7}|] = x + C$
     $\arctg t = \frac{1}{2} \ln |v| + \ln C = \ln c \sqrt{v} \Longleftrightarrow \arctg \frac{u}{v} = \ln C \sqrt{v} \Longleftrightarrow \arctg \frac{x - 3}{y + 2} = \ln C \sqrt{y + 2}$
 \end{minipage}
 
+\pagebreak
+\section{Лекция — 14.11.2023}
+
+\subsection{Линейное уравнение и уравнение Бернулли}
+
+Вид линейного уравнения:
+
+$$y' + p(x) y = q(x)$$
+
+Вид уравнения Бернулли:
+
+$$y' + p(x) y = q(x) y^{\alpha}$$
+
+\paragraph{Примеры}
+
+Допустим, имеем
+
+$$\frac{\diff y}{\diff x} = \frac{1}{x \cos y + \sin 2 y}$$
+
+$$\frac{\diff x}{\diff y} = x \cos y + \sin 2 y$$
+
+$$\frac{\diff x}{\diff y} + (\cos y) x = \sin 2y$$
+
+Получившееся уравнение мы можем решать уже знакомыми способами.
+
+$$x = u v, \ x' = u' v + u v'$$
+
+$$u'v + uv' + u v \cos y = \sin 2y$$
+
+\begin{enumerate}
+    \item 
+
+    $\frac{\diff v}{\diff y} = -v \cos y$
+
+    $\int \frac{\diff v}{v} = -\cos y \diff y$
+
+    $\ln v = - \sin y$
+
+    $v = e^{-\sin y}$
+
+    \item
+    
+    $\frac{\diff u}{\diff y} e^{- \sin y} = \sin 2y$
+
+    $\int \diff u = \int e^{\sin y} \sin 2y \diff y$
+
+    $u = 2 \int e^{\sin y} \cos y \diff y = 2 \int e^{\sin y} \sin y \diff (\sin y) = 2 \int t e^{t} \diff t = \begin{vmatrix}
+        u = t & \diff v = e^{t} \diff t
+        \diff t = \diff u & v = e^{t}
+    \end{vmatrix} = 2 (te^{t} - e^{t}) + C$
+
+    $x = uv = 2 (\sin y e^{\sin y} - e^{\sin y} + C) e^{\sin y} = 2 \sin y - 2 + C e^{- \sin y}$
+\end{enumerate}
+
+\subsection{Уравнения в полных дифференциалах}
+
+Пусть $u = u(x, y)$, ее полный дифференциал: $\diff u = \frac{\delta u}{\delta x} \diff x + \frac{\delta u}{\delta y} \diff y$
+
+Если $P(x, y) \diff x + Q(x, y) \diff y = 0$, $\frac{\delta u}{\delta x} \diff x + \frac{\delta u}{\delta y}{\diff y} = 0$, то $\diff u = 0 \implies u = C$
+
+$\frac{\delta}{\delta y} (\frac{\delta u}{\delta x}) = \frac{\delta}{\delta x} (\frac{\delta u}{\delta y})$
+
+Если $\frac{\delta P}{\delta y} = \frac{\delta Q}{\delta x}$, то имеем уравнение в полных дифференциалах
+
+Если мы уверены, что уравнение — уравнение в полных дифференциалах, то мы можем сделать так:
+
+$\diff u = P(x, y) \diff x + Q(x, y) \diff y$
+
+$u = \int\limits_{x_0}^{x} P(x, y_0) \diff x + \int\limits_{y_0}^{y} Q(x, y) \diff y + C = \int\limits_{x_0}^{x} P(x; y) \diff x + \int\limits_{y_0}^{y} Q(x_0; y) \diff y + C$
+
+$x_0$, $y_0$ — координаты некоторой точки, которая находится в области определения функций $P$ и $Q$, частные производные которых в этой точке также непрерывны.
+
+\paragraph{Примеры}
+
+\paragraph{Пример №1}
+
+$$(2xy + y^2) \diff x + (3x^2 + y) \diff y = 0$$
+
+$$\frac{\delta P}{\delta y} = 2x + 2y$$
+
+$$\frac{\delta Q}{\delta x} = 6x$$
+
+Не является уравнением в полных дифференциалах.
+
+\paragraph{Пример №2}
+
+$$(2x + y^2) \diff x + (2xy + y^3) \diff y = 0$$
+
+$$\frac{\delta P}{\delta y} = 2y$$
+
+$$\frac{\delta Q}{\delta x} = 2y$$
+
+Является уравнением в полных дифференциалах.
+
+\begin{enumerate}
+    \item
+    
+    $\frac{\delta u}{\delta x} = 2x + y^2$
+
+    $u = \int (2x + y^2) \diff x = x^2 + y^2 x + C(y)$
+    \item 
+
+    $\frac{\delta u}{\delta y} = 2xy + \frac{\delta C(y)}{\diff y} = Q = 2xy + y^3$
+
+    $\frac{\delta C}{\delta y} = y^3$
+
+    $\int \diff C = \int y^3 \diff y$
+
+    $C(y) = \frac{y^4}{4} + K$
+    \item $u = x^2 + y^2 x + \frac{y^4}{4} + K$
+\end{enumerate}
+
+В итоге мы восстановили функцию по ее полному дифференциалу.
+
+\textbf{Ответ}: $x^2 + y^2 x + \frac{y^4}{4} = Const$
+
+Попробуем восстановить ее другим образом:
+
+$\int\limits_{0}^{x} 2x \diff x + \int\limits_{0}^{y} (2xy + y^3) \diff y = \frac{2x^2}{2} \bigg|_{x = 0}^{x} + \frac{2xy^2}{2} \bigg|_{y = 0}^{y} + \frac{y^4}{4} \bigg|_{y = 0}^{y = y}$
+
+$u = x^2 + xy^2 + \frac{y^4}{4} + C$
+
+\textbf{В итоге получили то же самое}.
+
+\paragraph{Пример №3}
+
+$$3y \sin x \diff x - \cos x \diff y = 0$$
+
+$$\frac{\delta P}{\delta y} = 3 \sin x$$
+
+$$\frac{\delta Q}{\delta x} = \sin x$$
+
+Не является уравнением в полных дифференциалах.
+
+\subsubsection{Метод интегрирующего множителя}
+
+Может оказаться, что левая часть уравнения $M(x, y) \diff x + N(x, y) \diff y = 0$ не является полным дифференциалом, то есть, $\frac{\delta M}{\delta y} \ne \frac{\delta N}{\delta x}$. Можно подобрать функцию $\mu (x, y)$ такую, что если мы умножим все это уравнение на $\mu$, то оно окажется полным дифференциалом. Решение полученного уравнения будет совпадать с общим решением исходного.
+
+$$\mu M(x, y) \diff x + \mu N(x, y) \diff y = 0$$
+
+Так как мы хотим, чтобы полученное уравнение оказалось уравнением в полных дифференциалах, мы накладываем требования:
+
+$$\frac{\delta}{\delta x} (\mu N) = \frac{\delta}{\delta y} (\mu M)$$
+
+
+$$\mu \frac{\delta N}{\delta x} + N \frac{\delta \mu}{\delta x} = \mu \frac{\delta M}{\delta y} + M \frac{\delta \mu}{\delta y}$$
+
+$$\mu (\frac{\delta N}{\delta x} - \frac{\delta M}{\delta y}) = M \frac{\delta M}{\delta y} - N \frac{\delta M}{\delta x}$$
+
+$$\frac{\delta N}{\delta x} - \frac{\delta M}{\delta y} = M * \frac{1}{\mu} \frac{\delta \mu}{\delta y} - N * \frac{1}{\mu} \frac{\delta \mu}{\delta x}$$
+
+$$\frac{\delta N}{\delta x} - \frac{\delta M}{\delta y} = M \frac{\delta (\ln \mu)}{\delta y} - N \frac{\delta (\ln \mu)}{\delta x}$$
+
+Если $\mu$ не зависит от $x$, $\mu = \mu (y)$, то мы можем написать:
+
+$$\frac{\delta (\ln \mu)}{\delta y} = \frac{\frac{\delta N}{\delta x} - \frac{\delta M}{\delta y}}{M}$$
+
+Если $\mu$ не зависит от $y$, $\mu = \mu (x)$, то мы можем написать:
+
+
+$$\frac{\delta (\ln \mu)}{\delta x} = \frac{\frac{\delta M}{\delta y} - \frac{\delta N}{\delta x}}{N}$$
+
+\paragraph{Примеры}
+
+\paragraph{Пример №1}
+
+$$(y + xy^2) \diff x - x \diff y = 0$$
+
+$$M = (y +xy^2), \ N = -x$$
+
+$$\frac{\delta M}{\delta y} = 2xy + 1, \ \frac{\delta N}{\delta x} = -1$$
+
+Можем записать:
+
+$$\frac{\delta (\ln \mu)}{\delta y} = \frac{-1 - 2xy - 1}{y(1 + xy)} = \frac{-2(xy + 1)}{y (1 + xy)} = -\frac{2}{y}$$
+
+
+$$\int \diff \ln \mu = - \int \frac{2}{y} \diff y$$
+
+$$\ln \mu = -2 \ln y = \ln \frac{1}{y^2}$$
+
+$$\mu = \frac{1}{y^2}$$
+
+Умножаем наше выражение на $\mu$:
+
+$$\frac{y + xy^2}{y^2} \diff x - \frac{x}{y^2} \diff y = 0$$
+
+$$(\frac{1}{y} + x) \diff x - \frac{x}{y^2} \diff y = 0$$
+
+$$\frac{\delta P}{\delta y} = - \frac{1}{y^2} = \frac{\delta Q}{\delta x} = - \frac{1}{y^2}$$
+
+Можем попытаться восстановить функцию:
+
+$u = \int\limits_{0}^{x} (\frac{1}{y} + x) \diff x + \int\limits_{1}^{y} (0) \diff y = \frac{x}{y} + \frac{x^2}{2} \bigg|_{0}^{x} + C$
+
+Мы восстановили функцию, мы молодцы.
+
+\textbf{Ответ:} $\frac{x}{y} + \frac{x^2}{2} = Const$
+
+Попробуем пойти иначе:
+
+$$(y + xy^2) \diff x - x \diff y = 0$$
+
+$$(y + xy^2) \diff x = x \diff y$$
+
+$$\frac{\diff y}{\diff x} = \frac{y}{x} + y^2$$
+
+$$\frac{\diff y}{\diff x} - \frac{y}{x} = y^2$$
+
+Получили уравнение Бернулли. Решаем дальше:
+
+$$u'v + uv' - \frac{u v}{x} = u^2 v^2$$
+
+$$\frac{\diff v}{\diff x} = \frac{v}{x}$$
+
+$$\int \frac{\diff v}{v} = \int \frac{\diff x}{x}$$
+
+$$v = x$$
+
+Возвращаемся в уравнение:
+
+$$u' * v = u^2 v^2$$
+
+$$\frac{\diff u}{\diff x} = u^2 x$$
+
+$$\int \frac{\diff u}{u^2} = \int x \diff x$$
+
+$$C - \frac{1}{u} = \frac{x^2}{2}$$
+
+$$u = \frac{1}{C - \frac{x^2}{2}}$$
+
+$$y = \frac{x}{C - \frac{x^2}{2}} \Longleftrightarrow \frac{x}{y} = C - \frac{x^2}{2} \Longleftrightarrow \frac{x}{y} + \frac{x^2}{2} = C$$
+
+Получили тот же самый ответ.
+
+\paragraph{Пример №2}
+
+$$\frac{y}{x} \diff x + (y^3 - \ln x) \diff y = 0$$
+
+$$M = \frac{y}{x}, \ N = y^3 - \ln x$$
+
+$$\frac{\delta M}{\delta y} = \frac{1}{x}, \ \frac{\delta N}{\delta x} = - \frac{1}{x}$$
+
+$$\frac{\diff (\ln \mu)}{\diff y} = \frac{\frac{\delta N}{\delta x} - \frac{\delta M}{\delta y}}{\frac{y}{x}} = \frac{-\frac{1}{x} - \frac{1}{x}}{\frac{y}{x}}$$
+
+$\mu$ — не зависит от $x$
+
+$$\int \diff (\ln \mu) = - \int \frac{2}{y} \diff y$$
+
+$$\ln \mu = -2 \ln y$$
+
+$$\mu = \frac{1}{y^2}$$
+
+Умножим все уравнение на $\mu$:
+
+$$\frac{1}{y^2} \frac{y}{x} \diff x + (\frac{y^3}{y^2} + \frac{\ln x}{y^2}) \diff y = 0$$
+
+$$\frac{1}{xy}{\diff x} + (y - \frac{\ln x}{y^2}) \diff y = 0$$
+
+$$u = \int\limits_{1}^{x} \frac{1}{xy} \diff x + \int\limits_{1}^{y} (y ) \diff x + C$$
+
+$$u = \frac{1}{y} \ln x \bigg|_{x = 1}^{x} + \frac{y^2}{2} \bigg|_{y = 1}^{y} + C$$
+
+\textbf{Ответ}: $\frac{1}{y} \ln x + \frac{y^2}{2} = Const$
+
+\subsubsection{Финты ушами}
+
+Допустим, имеем:
+
+$$y = x * \Phi (y') + \Psi (y')$$
+
+$$y' = P$$
+
+$$y = x \Phi (p) + \Psi(p)$$
+
+$$y' = P = 1 * \Phi (p) + x \Phi'(P) * P' + \Psi' (P) P'$$
+
+$$p - \Phi(p) = (x * \Phi'(p) + \Psi'(p)) \frac{\diff p}{\diff x}$$
+
+С этим уравнением мы теперь можем работать.
+
+\subsection{Уравнения высших порядков, допускающие понижение порядка}
+
+Общий вид:
+
+$$F(x, y, y', y'', \dots, y^{(n)}) = 0$$
+
+\begin{enumerate}
+    \item $y^{(n)} = f(x)$
+
+    $y^{(n - 1)} = \int f(x) \diff x + C$
+
+    $y^{(n - 2)} = \int F_1(x) \diff x + C_1 x + C$
+\end{enumerate}
+
+Например, $y''' = x^2 + 5 \sin x$
+
+\begin{enumerate}
+    \item $y'' = \frac{x^3}{3} - 5\cos x + C_1$
+    \item $y' = \frac{x^4}{12} - 5 \sin x + C_1 x + C$
+    \item $y = \frac{x^5}{60} + 5 \cos x + \frac{C_1 x^2}{2} + C_2 x + C_3$
+\end{enumerate}
+
+И задано:
+
+\begin{enumerate}
+    \item $y(0) = 2$
+    \item $y'(0) = 1$
+    \item $y''(0) = 0$
+\end{enumerate}
+
+Можем вычислить:
+
+\begin{enumerate}
+    \item $y''(0) = \frac{0}{3} - 5 + C_1 = 0$, $C_1 = 5$
+    \item $y'(0) = C_2 = 1$
+    \item $y(0) = 5 + C_3 = 2 + C_3 = -3$
+\end{enumerate}
+
+\textbf{Ответ}: $y = \frac{x^5}{60} + 5 \cos x + \frac{5}{2} x^2 + x - 3$
+
 \end{document}
